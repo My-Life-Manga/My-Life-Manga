@@ -1,2 +1,1 @@
-# My-Life-Manga
-My-Life-Manga
+# node-react-template

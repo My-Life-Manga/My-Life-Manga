@@ -1,0 +1,22 @@
+@import "../../../sass/variables";
+@import "../../../sass/mixins";
+
+@media screen and (max-width: 390px) {
+  nav {
+    box-shadow: 0 0 1em black;
+  }
+
+  ul {
+    display: flex;
+    li {
+      list-style: none;
+      margin-right: 1em;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+

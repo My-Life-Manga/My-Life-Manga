@@ -1,0 +1,62 @@
+// * color map
+$color: ();
+
+// * font families map
+$font-family: ();
+
+// * flexbox variables
+$display: (
+  block: block,
+  flex: flex,
+  inline: inline,
+  inline-block: inline-block,
+  inline-flex: inline-flex,
+  none: none,
+);
+$flex-direction: (
+  row: row,
+  column: column,
+  row-r: row-reverse,
+  col-r: column-reverse,
+  none: none,
+);
+$justify-content: (
+  center: center,
+  flex-start: flex-start,
+  flex-end: flex-end,
+  space-between: space-between,
+  space-around: space-around,
+  space-evenly: space-evenly,
+  none: none,
+);
+$align-items: (
+  center: center,
+  flex-start: flex-start,
+  flex-end: flex-end,
+  space-around: space-around,
+  space-between: space-between,
+  stretch: stretch,
+  none: none,
+);
+$wrap: (
+  flex-wrap: wrap,
+  nowrap: nowrap,
+  none: none,
+);
+
+// * media queries
+$breakpoints: (
+  nestHubMax: 1280px,
+  ipadPro: 1024px,
+  SurfacePro7: 912px,
+  ipadAir: 820px,
+  ipadMini: 768px,
+  surfaceDuo: 540px,
+  iphoneXR: 415px,
+  S20Ultra: 412px,
+  iphone12Pro: 390px,
+  pixel5: 393px,
+  iphoneSE: 375px,
+  galaxyS8: 360px,
+  galaxyFold: 280px,
+);

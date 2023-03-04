@@ -1,0 +1,14 @@
+@function mapGetter($map, $val) {
+  @return map-get($map, $val);
+}
+
+@function complementary-color($color) {
+  $red: red($color);
+  $green: green($color);
+  $blue: blue($color);
+  $max: max($red, $green, $blue);
+  $min: min($red, $green, $blue);
+  $hue: if($max == $min, 0, if($max == $red, 60 * (($green - $blue) / ($max - $min) + 0), if($max == $green, 60 * (($blue - $red) / ($max - $min) + 2), 60 * (($red - $green) / ($max - $min) + 4))));
+  $complement: if($hue > 180, $hue - 180, $hue + 180);
+  @return adjust-hue(hsl($complement, saturation($color), lightness($color)), -180);
+}

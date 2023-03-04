@@ -1,0 +1,58 @@
+@import "../../../sass/media-queries";
+
+$breakpoints-1: (
+  ipadAir: 820px,
+  SurfacePro7: 912px,
+);
+
+$breakpoints-2: (
+  iphoneXR: 415px,
+  surfaceDuo: 540px,
+);
+
+@each $device, $breakpoint in $breakpoints-1 {
+  @include mq($device) {
+    .footer {
+      .container {
+        .row {
+          .col-md-6 {
+            justify-content: center;
+            .Footer__p {
+              height: 100%;
+              @include p0m0;
+            }
+          }
+          .Footer__links {
+            justify-content: center;
+            .Footer__ul {
+              @include p0m0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@each $device, $breakpoints in $breakpoints-2 {
+  @include mq($device) {
+    .footer {
+      .container {
+        .row {
+          .col-md-6 {
+            justify-content: center;
+            .Footer__p {
+              justify-content: center;
+            }
+          }
+          .Footer__links {
+            justify-content: center;
+            .Footer__ul {
+              @include p0m0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

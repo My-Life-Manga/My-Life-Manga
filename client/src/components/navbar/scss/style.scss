@@ -1,0 +1,41 @@
+nav {
+  box-shadow: 0 0 1em black;
+}
+
+ul {
+  display: flex;
+  li {
+    list-style: none;
+    margin-right: 1em;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.scale-up-ver-top,
+.scale-up-ver-bottom {
+  animation: scale-up-ver 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@keyframes scale-up-ver {
+  0% {
+    transform: scaleY(0.4);
+    transform-origin: 100% 0%;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
+  }
+}
+
+.scale-up-ver-top {
+  transform-origin: 100% 0%;
+}
+
+.scale-up-ver-bottom {
+  transform-origin: 0% 100%;
+}
+
+@import "./media-queries";

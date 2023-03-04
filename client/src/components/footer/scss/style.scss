@@ -1,0 +1,48 @@
+@import "../../../sass/mixins";
+
+.footer {
+  @include flexbox(flex, row, center, center);
+  position: fixed;
+  bottom: -100px;
+  background-color: #f8f9fa;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+  transition: bottom 0.3s ease-in-out;
+  padding: 20px 0;
+  margin-top: 20px;
+
+  &.show {
+    bottom: 0;
+  }
+
+  .Footer__p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .col-md-6 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .Footer__ul {
+      @include flexbox(flex, row, center, center, 0);
+
+      .Footer__li {
+        display: flex;
+        text-decoration: none;
+        margin: 0 1em;
+
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@import "./media-queries";
