@@ -5,21 +5,21 @@ import TemplatePage from "./pages/templatesPage/TemplatesPage";
 import { CookieBanner } from "./components";
 
 function App() {
-  const [showCookieConsent, setShowCookieConsent] = useState(false);
+  // const [showCookieConsent, setShowCookieConsent] = useState(false);
 
-  useEffect(() => {
-    const hasConsented = localStorage.getItem("cookieConsent");
-    console.log("hasConsented: ", hasConsented);
-    setShowCookieConsent(!hasConsented);
-  }, []);
+  // useEffect(() => {
+  //   const hasConsented = localStorage.getItem("cookieConsent");
+  //   console.log("hasConsented: ", hasConsented);
+  //   setShowCookieConsent(!hasConsented);
+  // }, []);
 
-  const handleCookieConsent = () => {
-    localStorage.setItem("cookieConsent", "true");
-    setShowCookieConsent(false);
-    console.log("Cookie consent accepted!");
-  };
+  // const handleCookieConsent = () => {
+  //   localStorage.setItem("cookieConsent", "true");
+  //   setShowCookieConsent(false);
+  //   console.log("Cookie consent accepted!");
+  // };
 
-  console.log("showCookieConsent: ", showCookieConsent);
+  // console.log("showCookieConsent: ", showCookieConsent);
 
   return (
     <Router>
@@ -58,7 +58,7 @@ function App() {
           <PrivacyPolicy />
         </Route>
       </Switch>
-      {showCookieConsent && <CookieBanner onAccept={handleCookieConsent} />}
+      {/* {showCookieConsent && <CookieBanner onAccept={handleCookieConsent} />} */}
     </Router>
   );
 }
