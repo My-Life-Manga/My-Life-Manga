@@ -1,6 +1,9 @@
-// server/index.js
+require("dotenv").config();
+
 const path = require("path");
 const express = require("express");
+const mysql = require("mysql2/promise");
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 
@@ -11,11 +14,26 @@ app.use(express.json());
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
-// Handle GET requests to /api route
-app.get("/api", (req, res) => {
-  let obj = {};
-  obj.error = { status: 1 };
-  res.send(obj);
+// Connect to MySQL database
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
+
+// Handle GET requests to /api/data route
+app.get("/api/data", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM mytable");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 });
 
 // All other GET requests not handled before will return our React app
