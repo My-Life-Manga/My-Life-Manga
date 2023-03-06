@@ -1,0 +1,7 @@
+CREATE TABLE posts (
+  id INTEGER PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);

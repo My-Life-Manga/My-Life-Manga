@@ -1,0 +1,10 @@
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\bin\Debug\manga_db.dacpac
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\bin\Debug\manga_db.dll
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\bin\Debug\manga_db.pdb
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\manga_db.sqlproj.AssemblyReference.cache
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\Model.xml
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\refactor.xml
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\postdeploy.sql
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\predeploy.sql
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\manga_db.dll
+c:\Users\Clav\OneDrive\Desktop\VS Code Repos\My-Life-Manga\My-Life-Manga\server\manga_db\obj\Debug\manga_db.pdb
