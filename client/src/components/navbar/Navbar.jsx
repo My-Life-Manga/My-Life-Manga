@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style.css";
 
@@ -12,6 +13,8 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const dropdownRef = useRef(null);
+  const history = useHistory();
+  const [cookies, setCookie, removeCookie] = useCookies(["authToken"]);
 
   function handleDropdownClick() {
     setIsDropdownActive((prevState) => !prevState);
@@ -24,6 +27,18 @@ function Navbar() {
       dropdownRef.current.classList.add("scale-up-ver-top");
     }
   }
+
+  function handleLogout() {
+    removeCookie("authToken");
+    setIsAuthenticated(false);
+    history.push("/login");
+  }
+
+  useEffect(() => {
+    if (cookies.authToken) {
+      setIsAuthenticated(true);
+    }
+  }, [cookies]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
@@ -87,13 +102,18 @@ function Navbar() {
           </div>
         ) : (
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+            <li className            ="nav-item">
               <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                 <button className="btn btn-outline-success" type="submit">
                   Search
                 </button>
               </form>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-outline-light ms-2" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         )}
@@ -103,3 +123,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
