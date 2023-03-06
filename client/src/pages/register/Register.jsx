@@ -26,9 +26,9 @@ function Register() {
     e.preventDefault();
     try {
       const response = await axios.post(`http://localhost:3001/register`, {
-        username,
-        email,
-        password,
+        username: username,
+        email: email,
+        password: password,
       });
       console.log(response);
       if (response.status === 201) {
