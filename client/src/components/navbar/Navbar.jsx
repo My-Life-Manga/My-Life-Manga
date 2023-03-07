@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,22 +11,8 @@ const activeStyle = {
 
 function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const dropdownRef = useRef(null);
   const history = useHistory();
   const [cookies, setCookie, removeCookie] = useCookies(["authToken"]);
-
-  function handleDropdownClick() {
-    setIsDropdownActive((prevState) => !prevState);
-
-    if (dropdownRef.current.classList.contains("show")) {
-      dropdownRef.current.classList.remove("scale-up-ver-top");
-      dropdownRef.current.classList.add("scale-up-ver-bottom");
-    } else {
-      dropdownRef.current.classList.remove("scale-up-ver-bottom");
-      dropdownRef.current.classList.add("scale-up-ver-top");
-    }
-  }
 
   function handleLogout() {
     removeCookie("authToken");
@@ -65,31 +51,6 @@ function Navbar() {
               Contact
             </NavLink>
           </li>
-          <li className="nav-item dropdown">
-            <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" onClick={handleDropdownClick}>
-              Dropdown
-            </NavLink>
-            <ul ref={dropdownRef} className={`dropdown-menu ${isDropdownActive ? "show scale-up-ver-top" : "scale-up-ver-bottom"}`} aria-labelledby="navbarDropdown">
-              <li>
-                <NavLink className="dropdown-item" to="/action">
-                  Action
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="dropdown-item" to="#">
-                  Another action
-                </NavLink>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <NavLink className="dropdown-item" to="#">
-                  Something else here
-                </NavLink>
-              </li>
-            </ul>
-          </li>
         </ul>
         {!isAuthenticated ? (
           <div className="d-flex">
@@ -102,7 +63,7 @@ function Navbar() {
           </div>
         ) : (
           <ul className="navbar-nav ms-auto">
-            <li className            ="nav-item">
+            <li className="nav-item">
               <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                 <button className="btn btn-outline-success" type="submit">
@@ -123,4 +84,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
