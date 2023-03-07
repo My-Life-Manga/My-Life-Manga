@@ -65,6 +65,16 @@ app.post(process.env.LOGIN, async (req, res) => {
   });
 });
 
+// profile api
+app.get('/profile', (req, res) => {
+  const profile = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    age: 30
+  };
+  res.json(profile);
+});
+
 // server port listener
 app.listen(process.env.SERVER_PORT, () => {
   console.log("connected to server");
