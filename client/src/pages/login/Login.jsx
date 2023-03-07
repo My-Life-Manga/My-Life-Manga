@@ -19,7 +19,6 @@ const Login = () => {
         username,
         password,
       });
-      console.log(response);
       if (response.data.message === "Authenticated") {
         setAuthToken("authToken", response.data.token);
         history.push("/");
