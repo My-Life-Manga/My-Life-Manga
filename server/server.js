@@ -1,32 +1,35 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 import express from 'express';
 import mysql from 'mysql';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 
 const app = express();
+app.use(express.json());
 
 // ! DONT TOUCH !
 const db = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: "codeup",
-  database: "manga_db",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: process.env.ORIGIN
 }));
 
 // Register a user
-app.use(express.json());
-
-app.post("/register", async (req, res) => {
+app.post(process.env.REGISTER, async (req, res) => {
   const {username, email, password} = req.body;
-  console.log(`Registering user: ${username} ${email} ${password}`);
+  console.log(`Registering user: ${username}`);
   const hashedPassword = await bcrypt.hash(password, 10);
   const q = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-  db.query(q, [username, email, hashedPassword], (err, data) => {
+  db.query(q, [username, email, hashedPassword], (err) => {
     if (err) {
       console.error("Error registering user:", err);
       res.status(500).json({message: "Registration failed"});
@@ -38,9 +41,9 @@ app.post("/register", async (req, res) => {
 });
 
 // Login/Authenticate user
-app.post("/login", async (req, res) => {
+app.post(process.env.LOGIN, async (req, res) => {
   const {username, password} = req.body;
-  console.log(`Authenticating user: ${username} ${password}`);
+  console.log(`Authenticating user: ${username}`);
   const q = "SELECT * FROM users WHERE username = ?";
   db.query(q, [username], async (err, data) => {
     if (err) {
@@ -53,7 +56,7 @@ app.post("/login", async (req, res) => {
       const match = await bcrypt.compare(password, data[0].password);
       if (match) {
         console.log("User authenticated successfully");
-        res.status(200).json({message: "Authenticated", token: "example_auth_token"});
+        res.status(200).json({message: "Authenticated", token: process.env.TOKEN});
       } else {
         console.log("User authentication failed");
         res.status(401).json({message: "Authentication failed"});
@@ -62,12 +65,7 @@ app.post("/login", async (req, res) => {
   });
 });
 
-// Test to make sure backend is connected
-app.get("/", (req, res) => {
-  res.json("hello from backend");
-});
-
 // server port listener
-app.listen(3001, () => {
+app.listen(process.env.SERVER_PORT, () => {
   console.log("connected to server");
 });
