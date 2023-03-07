@@ -1,10 +1,11 @@
-export { default as Home } from "./home/Home";
-export { default as About } from "./about/About";
-export { default as Contact } from "./contact/Contact";
-export { default as ErrorHandling } from "./errorHandling/ErrorHandling";
-export { default as Login } from "./login/Login";
-export { default as Register } from "./register/Register";
-export { default as Profile } from "./profile/Profile";
-export { default as EditProfile } from "./edit-profile/EditProfile";
-export { default as TermsOfUse } from "./terms/TermsOfUse";
-export { default as PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
+export {default as Home} from "./home/Home";
+export {default as About} from "./about/About";
+export {default as Contact} from "./contact/Contact";
+export {default as ErrorHandling} from "./errorHandling/ErrorHandling";
+export {default as Login} from "./login/Login";
+export {default as Register} from "./register/Register";
+export {default as Profile} from "./profile/Profile";
+export {default as ProfileEdit} from './profileEdit/ProfileEdit'
+export {default as EditProfile} from "./edit-profile/EditProfile";
+export {default as TermsOfUse} from "./terms/TermsOfUse";
+export {default as PrivacyPolicy} from "./privacy-policy/PrivacyPolicy";

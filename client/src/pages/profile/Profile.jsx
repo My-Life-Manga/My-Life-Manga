@@ -28,7 +28,7 @@ const Profile = () => {
     );
   }
 
-  const {name, title, location, about, skills = [], education, experience = []} = user;
+  const {name, location, about} = user;
 
   return (
     <>
@@ -38,7 +38,6 @@ const Profile = () => {
           <Col md={4}>
             <Image src="https://via.placeholder.com/150" roundedCircle className="mb-3"/>
             <h3>{name}</h3>
-            <p>{title}</p>
             <p>{location}</p>
             <Button variant="primary" href="/profile/edit">
               Edit Profile
@@ -47,31 +46,6 @@ const Profile = () => {
           <Col md={8}>
             <h4>About</h4>
             <p>{about}</p>
-            <h4>Skills</h4>
-            <ul>
-              {skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
-              ))}
-            </ul>
-            <h4>Education</h4>
-            <p>{education}</p>
-            <h4>Experience</h4>
-            {experience.map((job, index) => (
-              <div key={index}>
-                <h5>{job.title}</h5>
-                <p>{job.company}</p>
-                <p>
-                  {job.startDate} - {job.endDate}
-                </p>
-                {job.responsibilities && (
-                  <ul>
-                    {job.responsibilities.map((responsibility, index) => (
-                      <li key={index}>{responsibility}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
           </Col>
         </Row>
       </Container>

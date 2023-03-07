@@ -69,8 +69,8 @@ app.post(process.env.LOGIN, async (req, res) => {
 app.get('/profile', (req, res) => {
   const profile = {
     name: 'John Doe',
-    email: 'john.doe@example.com',
-    age: 30
+    location: 'New York',
+    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc tellus, vel interdum sem fermentum quis. Nullam in efficitur ante. Praesent condimentum, nisl ac pellentesque malesuada, sapien lorem dictum libero, non pretium felis felis non velit. Sed feugiat volutpat libero, vitae auctor purus ultricies in. Donec volutpat imperdiet turpis id hendrerit. Integer sit amet sollicitudin massa, a suscipit nisi. Aenean euismod, leo nec pharetra porttitor, nisi leo finibus ex, ac vulputate purus enim sed mi. Etiam hendrerit risus in ligula convallis ultrices.',
   };
   res.json(profile);
 });

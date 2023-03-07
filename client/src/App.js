@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, About, Contact, ErrorHandling, Login, Register, Profile, EditProfile, PrivacyPolicy, TermsOfUse } from "./pages/index";
+import { Home, About, Contact, ErrorHandling, Login, Register, Profile, ProfileEdit, PrivacyPolicy, TermsOfUse } from "./pages/index";
 import TemplatePage from "./pages/templatesPage/TemplatesPage";
 import { CookieBanner } from "./components";
 
@@ -45,11 +45,11 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/profile">
+        <Route exact path="/profile">
           <Profile />
         </Route>
-        <Route path="/profile/edit">
-          <EditProfile />
+        <Route exact path="/profile/edit">
+          <ProfileEdit />
         </Route>
         <Route path="/terms">
           <TermsOfUse />
