@@ -67,15 +67,6 @@ app.get("/", (req, res) => {
   res.json("hello from backend");
 });
 
-// test to see if database getting info to the server
-app.get("/users", (req, res) => {
-  const q = "SELECT * FROM users";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err)
-    return res.json(data)
-  })
-})
-
 // server port listener
 app.listen(3001, () => {
   console.log("connected to server");
