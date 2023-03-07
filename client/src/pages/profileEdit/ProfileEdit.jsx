@@ -47,11 +47,6 @@ const ProfileEdit = () => {
             <Form.Control type="text" defaultValue={name} />
           </Form.Group>
 
-          <Form.Group controlId="formBasicTitle">
-            <Form.Label>Title</Form.Label>
-            <Form.Control type="text" defaultValue={title} />
-          </Form.Group>
-
           <Form.Group controlId="formBasicLocation">
             <Form.Label>Location</Form.Label>
             <Form.Control type="text" defaultValue={location} />
