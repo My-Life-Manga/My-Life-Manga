@@ -34,8 +34,7 @@ const Register = () => {
       <div className="card">
         <div className="left">
           <h1>Manga Life</h1>
-          <p>
-          </p>
+          <p></p>
           <span>Do you have an account?</span>
           <Link to="/login">
             <button>Login</button>
@@ -44,31 +43,11 @@ const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              onChange={handleChange}
-            />
-            {err && err}
+            <input type="text" placeholder="Username" name="username" onChange={handleChange} />
+            <input type="email" placeholder="Email" name="email" onChange={handleChange} />
+            <input type="password" placeholder="Password" name="password" onChange={handleChange} />
+            <input type="text" placeholder="Name" name="name" onChange={handleChange} />
+            {err && <p>{err.sqlMessage}</p>}
             <button onClick={handleClick}>Register</button>
           </form>
         </div>
