@@ -15,10 +15,11 @@ const Posts = ({userId}) => {
       {error
         ? "Something went wrong!"
         : isLoading
-        ? "loading"
-        : data.map((post) => <Post post={post} key={post.id} />)}
+          ? "loading"
+          : data.map((post) => <Post post={post} key={post.id} />)}
     </div>
   );
 };
+
 
 export default Posts;
