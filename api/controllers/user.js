@@ -7,10 +7,12 @@ export const getUser = (req, res) => {
 
   db.query(q, [userId], (err, data) => {
     if (err) return res.status(500).json(err);
+    if (data.length === 0) return res.status(404).json("User not found!");
     const { password, ...info } = data[0];
     return res.json(info);
   });
 };
+
 
 export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
@@ -34,9 +36,11 @@ export const updateUser = (req, res) => {
       ],
       (err, data) => {
         if (err) res.status(500).json(err);
+        if (!data || data.affectedRows === 0) return res.status(404).json("User not found!");
         if (data.affectedRows > 0) return res.json("Updated!");
         return res.status(403).json("You can update only your post!");
       }
     );
   });
 };
+
