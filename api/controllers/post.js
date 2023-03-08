@@ -9,7 +9,12 @@ export const getPosts = (req, res) => {
   jwt.verify(token, "secretkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const q = `SELECT * FROM posts ORDER BY createdAt DESC`;
+    const q = `
+      SELECT posts.*, users.name
+      FROM posts
+      JOIN users ON posts.userId = users.id
+      ORDER BY createdAt DESC
+    `;
 
     db.query(q, (err, data) => {
       if (err) return res.status(500).json(err);
@@ -17,6 +22,7 @@ export const getPosts = (req, res) => {
     });
   });
 };
+
 
 export const addPost = (req, res) => {
   const token = req.cookies.accessToken;

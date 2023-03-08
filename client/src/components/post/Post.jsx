@@ -98,14 +98,14 @@ const Post = ({ post }) => {
             )}
             {data?.length} Likes
           </div>
-          {/*<div className="item" onClick={() => setCommentOpen(!commentOpen)}>*/}
-          {/*  <TextsmsOutlinedIcon />*/}
-          {/*  See Comments*/}
-          {/*</div>*/}
-          {/*<div className="item">*/}
-          {/*  <ShareOutlinedIcon />*/}
-          {/*  Share*/}
-          {/*</div>*/}
+          <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
+            <TextsmsOutlinedIcon />
+            See Comments
+          </div>
+          <div className="item">
+            <ShareOutlinedIcon />
+            Share
+          </div>
         </div>
         {commentOpen && <Comments postId={post.id} />}
       </div>
