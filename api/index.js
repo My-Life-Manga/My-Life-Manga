@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 app.use(cookieParser());
@@ -45,6 +46,12 @@ app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 app.use("/api/relationships", relationshipRoutes);
+
+// Logout route
+app.get("/api/auth/logout", (req, res) => {
+  res.clearCookie("token");
+  res.status(200).send("Logged out successfully");
+});
 
 app.listen(8800, () => {
   console.log("API working!");

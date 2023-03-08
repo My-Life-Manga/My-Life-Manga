@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
@@ -21,6 +23,7 @@ const Register = () => {
 
     try {
       await axios.post("http://localhost:8800/api/auth/register", inputs);
+      navigate("/login"); // Redirect to home page once registered
     } catch (err) {
       setErr(err.response.data);
     }
