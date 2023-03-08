@@ -1,65 +1,82 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, About, Contact, ErrorHandling, Login, Register, Profile, ProfileEdit, PrivacyPolicy, TermsOfUse } from "./pages/index";
-import TemplatePage from "./pages/templatesPage/TemplatesPage";
-import { CookieBanner } from "./components";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import {createBrowserRouter, RouterProvider, Outlet, Navigate} from "react-router-dom";
+import Navbar from "./components/navbar/Navbar";
+import LeftBar from "./components/leftBar/LeftBar";
+import RightBar from "./components/rightBar/RightBar";
+import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
+import "./style.scss";
+import {useContext} from "react";
+import {DarkModeContext} from "./context/darkModeContext";
+import {AuthContext} from "./context/authContext";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 function App() {
-  // const [showCookieConsent, setShowCookieConsent] = useState(false);
+  const {currentUser} = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const hasConsented = localStorage.getItem("cookieConsent");
-  //   console.log("hasConsented: ", hasConsented);
-  //   setShowCookieConsent(!hasConsented);
-  // }, []);
+  const {darkMode} = useContext(DarkModeContext);
 
-  // const handleCookieConsent = () => {
-  //   localStorage.setItem("cookieConsent", "true");
-  //   setShowCookieConsent(false);
-  //   console.log("Cookie consent accepted!");
-  // };
+  const queryClient = new QueryClient();
 
-  // console.log("showCookieConsent: ", showCookieConsent);
+  const Layout = () => {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <Navbar/>
+          <div style={{display: "flex"}}>
+            <LeftBar/>
+            <div style={{flex: 6}}>
+              <Outlet/>
+            </div>
+            <RightBar/>
+          </div>
+        </div>
+      </QueryClientProvider>
+    );
+  };
+
+  const ProtectedRoute = ({children}) => {
+    if (!currentUser) {
+      return <Navigate to="/login"/>;
+    }
+
+    return children;
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <ProtectedRoute>
+          <Layout/>
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: "/",
+          element: <Home/>,
+        },
+        {
+          path: "/profile/:id",
+          element: <Profile/>,
+        },
+      ],
+    },
+    {
+      path: "/login",
+      element: <Login/>,
+    },
+    {
+      path: "/register",
+      element: <Register/>,
+    },
+  ]);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/templates">
-          <TemplatePage />
-        </Route>
-        <Route path="/errors">
-          <ErrorHandling />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-        <Route exact path="/profile/edit">
-          <ProfileEdit />
-        </Route>
-        <Route path="/terms">
-          <TermsOfUse />
-        </Route>
-        <Route path="/privacy-policy">
-          <PrivacyPolicy />
-        </Route>
-      </Switch>
-      {/* {showCookieConsent && <CookieBanner onAccept={handleCookieConsent} />} */}
-    </Router>
+    <RouterProvider router={router}>
+      <Outlet/>
+    </RouterProvider>
   );
 }
 

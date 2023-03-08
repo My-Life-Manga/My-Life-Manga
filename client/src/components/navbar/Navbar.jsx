@@ -1,86 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/style.css";
+import "./navbar.scss";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/authContext";
 
-const activeStyle = {
-  fontWeight: "bold",
-  color: "white",
-};
-
-function Navbar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const history = useHistory();
-  const [cookies, setCookie, removeCookie] = useCookies(["authToken"]);
-
-  function handleLogout() {
-    removeCookie("authToken");
-    setIsAuthenticated(false);
-    history.push("/login");
-  }
-
-  useEffect(() => {
-    if (cookies.authToken) {
-      setIsAuthenticated(true);
-    }
-  }, [cookies]);
+const Navbar = () => {
+  const { toggle, darkMode } = useContext(DarkModeContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <NavLink className="navbar-brand" to="/">
-        Navbar
-      </NavLink>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav me-auto">
-          <li className="nav-item">
-            <NavLink exact className="nav-link" to="/" activeStyle={activeStyle}>
-              Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/about" activeStyle={activeStyle}>
-              About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/contact" activeStyle={activeStyle}>
-              Contact
-            </NavLink>
-          </li>
-        </ul>
-        {!isAuthenticated ? (
-          <div className="d-flex">
-            <NavLink to="/login" className="btn btn-outline-light me-2">
-              Login
-            </NavLink>
-            <NavLink to="/register" className="btn btn-outline-light">
-              Register
-            </NavLink>
-          </div>
+    <div className="navbar">
+      <div className="left">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span>MangaLife</span>
+        </Link>
+        <HomeOutlinedIcon />
+        {darkMode ? (
+          <WbSunnyOutlinedIcon onClick={toggle} />
         ) : (
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button>
-              </form>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-outline-light ms-2" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
-          </ul>
+          <DarkModeOutlinedIcon onClick={toggle} />
         )}
+        <GridViewOutlinedIcon />
+        <div className="search">
+          <SearchOutlinedIcon />
+          <input type="text" placeholder="Search..." />
+        </div>
       </div>
-    </nav>
+      <div className="right">
+        <PersonOutlinedIcon />
+        <EmailOutlinedIcon />
+        <NotificationsOutlinedIcon />
+        <div className="user">
+          <img
+            src={"/upload/" + currentUser.profilePic}
+            alt=""
+          />
+          <span>{currentUser.name}</span>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Navbar;

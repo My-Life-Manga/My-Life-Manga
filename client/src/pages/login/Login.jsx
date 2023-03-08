@@ -1,74 +1,64 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { Navbar, Footer } from "../../components";
-import axios from "axios";
-import logo from "../../components/templates/img/logo.png";
+import {useContext, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/authContext";
+import "./login.scss";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const history = useHistory();
-  const [, setAuthToken] = useCookies(["authToken"]);
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+  const [err, setErr] = useState(null);
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({...prev, [e.target.name]: e.target.value}));
+  };
+  const {login} = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3001/login`, {
-        username,
-        password,
-      });
-      if (response.data.message === "Authenticated") {
-        setAuthToken("authToken", response.data.token);
-        history.push("/");
-      } else {
-        setError("Invalid username or password");
-      }
-    } catch (error) {
-      console.log(error);
-      setError("Server error");
+      await login(inputs);
+      navigate("/")
+    } catch (err) {
+      setErr(err.response.data);
     }
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="container">
-        <div className="row justify-content-md-center mt-5">
-          <div className="col-md-6">
-            <h2>Login</h2>
-            <LoginForm username={username} password={password} setUsername={setUsername} setPassword={setPassword} onSubmit={handleLogin} error={error} />
-          </div>
-          <div className="col-md-6 col-12 d-flex justify-content-md-end">
-            <img src={logo} alt="logo" height="300px"></img>
-          </div>
+    <div className="login">
+      <div className="card">
+        <div className="left">
+          <h1>Manga Life</h1>
+          <p></p>
+          <span>Don't have an account?</span>
+          <Link to="/register">
+            <button>Register</button>
+          </Link>
+        </div>
+        <div className="right">
+          <h1>Login</h1>
+          <form>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+            />
+            {err && err}
+            <button onClick={handleLogin}>Login</button>
+          </form>
         </div>
       </div>
-      <Footer />
-    </>
-  );
-};
-
-const LoginForm = ({ username, password, setUsername, setPassword, onSubmit, error }) => {
-  return (
-    <form onSubmit={onSubmit}>
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
-        <input type="text" className="form-control" id="username" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </div>
-
-      <button className="btn btn-primary" type="submit">
-        Login
-      </button>
-    </form>
+    </div>
   );
 };
 

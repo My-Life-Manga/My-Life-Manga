@@ -1,80 +1,77 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Navbar, Footer } from "../../components";
-import logo from "../../components/templates/img/logo.png";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./register.scss";
 import axios from "axios";
 
-function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
+const Register = () => {
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+    password: "",
+    name: "",
+  });
+  const [err, setErr] = useState(null);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post(`http://localhost:3001/register`, {
-        username: username,
-        email: email,
-        password: password,
-      });
-      console.log(response);
-      if (response.status === 201) {
-        history.push("/login");
-      } else {
-        console.error("Registration failed");
-      }
-    } catch (error) {
-      console.log(error);
-      console.error("Registration failed");
+      await axios.post("http://localhost:8800/api/auth/register", inputs);
+    } catch (err) {
+      setErr(err.response.data);
     }
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="container my-5">
-        <div className="justify-content-md-start mt-5 row">
-          <div className="col-md-6 col-12">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Username</label>
-                <input type="text" className="form-control" value={username} onChange={handleUsernameChange} />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input type="email" className="form-control" value={email} onChange={handleEmailChange} />
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input type="password" className="form-control" value={password} onChange={handlePasswordChange} />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Register
-              </button>
-            </form>
-          </div>
-          <div className="col-md-6 col-12 d-flex justify-content-md-end">
-            <img src={logo} alt="logo" height="300px"></img>
-          </div>
+    <div className="register">
+      <div className="card">
+        <div className="left">
+          <h1>Manga Life</h1>
+          <p>
+          </p>
+          <span>Do you have an account?</span>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+        </div>
+        <div className="right">
+          <h1>Register</h1>
+          <form>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              onChange={handleChange}
+            />
+            {err && err}
+            <button onClick={handleClick}>Register</button>
+          </form>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
-}
+};
 
 export default Register;

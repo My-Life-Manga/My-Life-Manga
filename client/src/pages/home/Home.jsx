@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import ProgressBar from "../../components/progress-bar/ProgressBar";
-import { Navbar, Footer } from "../../components/index";
-import "./css/style.css";
+import Stories from "../../components/stories/Stories"
+import Posts from "../../components/posts/Posts"
+import Share from "../../components/share/Share"
+import "./home.scss"
 
-function Home() {
+const Home = () => {
   return (
-    <>
-      <Navbar />
-      <div className="Home">
-        <h1>Welcome to My life Manga</h1>
-      </div>
-      <Footer />
-    </>
-  );
+    <div className="home">
+      <Stories/>
+      <Share/>
+      <Posts/>
+    </div>
+  )
 }
 
-export default Home;
+export default Home
