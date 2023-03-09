@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const ProfileEdit = () => {
@@ -15,7 +15,7 @@ const ProfileEdit = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const userId = parseInt(useLocation().pathname.split("/")[2]);
+  const userId = currentUser.id;
 
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
@@ -23,13 +23,20 @@ const ProfileEdit = () => {
     })
   );
 
+  useEffect(() => {
+    if (!isLoading && data) {
+      setName(data.name);
+      setCity(data.city);
+      setWebsite(data.website);
+    }
+  }, [isLoading, data]);
+
   const queryClient = useQueryClient();
 
   const updateMutation = useMutation(
     (formData) => makeRequest.put("/users/" + userId, formData),
     {
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(["user"]);
       },
     }
@@ -59,8 +66,12 @@ const ProfileEdit = () => {
       ) : (
         <>
           <div className="images">
-            <img src={"/upload/"+data.coverPic} alt="" className="cover" />
-            <img src={"/upload/"+data.profilePic} alt="" className="profilePic" />
+            <img src={"/upload/" + data.coverPic} alt="" className="cover" />
+            <img
+              src={"/upload/" + data.profilePic}
+              alt=""
+              className="profilePic"
+            />
           </div>
           <form onSubmit={handleUpdate}>
             <input
