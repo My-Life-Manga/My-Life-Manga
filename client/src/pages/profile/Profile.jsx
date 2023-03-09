@@ -1,26 +1,26 @@
 import "./profile.scss";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { makeRequest } from "../../axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../context/authContext";
+import {useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
+import {makeRequest} from "../../axios";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useContext, useState} from "react";
+import {AuthContext} from "../../context/authContext";
 import Update from "../../components/update/Update";
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 
-  const { isLoading, error, data } = useQuery(["user"], () =>
+  const {isLoading, error, data} = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
       return res.data;
     })
   );
 
-  const { isLoading: rIsLoading, data: relationshipData } = useQuery(
+  const {isLoading: rIsLoading, data: relationshipData} = useQuery(
     ["relationship"],
     () =>
       makeRequest.get("/relationships?followedUserId=" + userId).then((res) => {
@@ -34,7 +34,7 @@ const Profile = () => {
     (following) => {
       if (following)
         return makeRequest.delete("/relationships?userId=" + userId);
-      return makeRequest.post("/relationships", { userId });
+      return makeRequest.post("/relationships", {userId});
     },
     {
       onSuccess: () => {
@@ -60,17 +60,11 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      {isLoading ? (
-        "loading"
-      ) : (
+      {isLoading ? ("loading") : (
         <>
           <div className="images">
-            <img src={"/upload/" + data.coverPic} alt="" className="cover" />
-            <img
-              src={"/upload/" + data.profilePic}
-              alt=""
-              className="profilePic"
-            />
+            <img src={"/upload/" + data.coverPic} alt="" className="cover"/>
+            <img src={"/upload/" + data.profilePic} alt="" className="profilePic"/>
           </div>
           <div className="profileContainer">
             <div className="uInfo">
@@ -79,11 +73,11 @@ const Profile = () => {
                   <span>{data.name}</span>
                   <div className="info">
                     <div className="item">
-                      <PlaceIcon />
+                      <PlaceIcon/>
                       <span>{data.city}</span>
                     </div>
                     <div className="item">
-                      <LanguageIcon />
+                      <LanguageIcon/>
                       <span>{data.website}</span>
                     </div>
                   </div>
@@ -98,7 +92,7 @@ const Profile = () => {
           </div>
         </>
       )}
-      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
   );
 };
