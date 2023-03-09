@@ -1,35 +1,27 @@
 import "./profile.scss";
-import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Posts from "../../components/posts/Posts";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { makeRequest } from "../../axios";
-import { useLocation } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
+import {useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
+import {makeRequest} from "../../axios";
+import {useLocation} from "react-router-dom";
+import {useContext} from "react";
+import {AuthContext} from "../../context/authContext";
 import Update from "../../components/update/Update";
-import { useState } from "react";
+import {useState} from "react";
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 
-  const { isLoading, error, data } = useQuery(["user"], () =>
+  const {isLoading, error, data} = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
       return res.data;
     })
   );
 
-  const { isLoading: rIsLoading, data: relationshipData } = useQuery(
+  const {isLoading: rIsLoading, data: relationshipData} = useQuery(
     ["relationship"],
     () =>
       makeRequest.get("/relationships?followedUserId=" + userId).then((res) => {
@@ -43,7 +35,7 @@ const Profile = () => {
     (following) => {
       if (following)
         return makeRequest.delete("/relationships?userId=" + userId);
-      return makeRequest.post("/relationships", { userId });
+      return makeRequest.post("/relationships", {userId});
     },
     {
       onSuccess: () => {
@@ -54,7 +46,11 @@ const Profile = () => {
   );
 
   const handleFollow = () => {
-    mutation.mutate(relationshipData.includes(currentUser.id));
+    if (userId === currentUser.id) {
+      setOpenUpdate(true);
+    } else {
+      mutation.mutate(relationshipData.includes(currentUser.id));
+    }
   };
 
   return (
@@ -64,38 +60,38 @@ const Profile = () => {
       ) : (
         <>
           <div className="images">
-            <img src={"/upload/"+data.coverPic} alt="" className="cover" />
-            <img src={"/upload/"+data.profilePic} alt="" className="profilePic" />
+            <img src={"/upload/" + data.coverPic} alt="" className="cover"/>
+            <img src={"/upload/" + data.profilePic} alt="" className="profilePic"/>
           </div>
           <div className="profileContainer">
             <div className="uInfo">
-              <div className="left">
-                <span>{data.name}</span>
-              </div>
-              <div className="center">
-                <div className="info">
-                  <div className="item">
-                    <PlaceIcon />
-                    <span>{data.city}</span>
-                  </div>
-                  <div className="item">
-                    <LanguageIcon />
-                    <span>{data.website}</span>
+              <div className="center-items">
+                <div className="center">
+                  <span>{data.name}</span>
+                  <div className="info">
+                    <div className="item">
+                      <PlaceIcon/>
+                      <span>{data.city}</span>
+                    </div>
+                    <div className="item">
+                      <LanguageIcon/>
+                      <span>{data.website}</span>
+                    </div>
                   </div>
                 </div>
-                <button className="update-profile" onClick={() => setOpenUpdate(true)}>
-                  Update Profile
-                </button>
+                {userId === currentUser.id && (
+                  <div className="update-profile">
+                    <button onClick={() => setOpenUpdate(true)}>Update Profile</button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </>
       )}
-      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
   );
-
-
 };
 
 export default Profile;
