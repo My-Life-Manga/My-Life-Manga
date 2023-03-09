@@ -70,24 +70,9 @@ const Profile = () => {
           <div className="profileContainer">
             <div className="uInfo">
               <div className="left">
-                <a href="http://facebook.com">
-                  <FacebookTwoToneIcon fontSize="large" />
-                </a>
-                <a href="http://facebook.com">
-                  <InstagramIcon fontSize="large" />
-                </a>
-                <a href="http://facebook.com">
-                  <TwitterIcon fontSize="large" />
-                </a>
-                <a href="http://facebook.com">
-                  <LinkedInIcon fontSize="large" />
-                </a>
-                <a href="http://facebook.com">
-                  <PinterestIcon fontSize="large" />
-                </a>
+                <span>{data.name}</span>
               </div>
               <div className="center">
-                <span>{data.name}</span>
                 <div className="info">
                   <div className="item">
                     <PlaceIcon />
@@ -98,21 +83,9 @@ const Profile = () => {
                     <span>{data.website}</span>
                   </div>
                 </div>
-                {rIsLoading ? (
-                  "loading"
-                ) : userId === currentUser.id ? (
-                  <button onClick={() => setOpenUpdate(true)}>update</button>
-                ) : (
-                  <button onClick={handleFollow}>
-                    {relationshipData.includes(currentUser.id)
-                      ? "Following"
-                      : "Follow"}
-                  </button>
-                )}
-              </div>
-              <div className="right">
-                <EmailOutlinedIcon />
-                <MoreVertIcon />
+                <button className="update-profile" onClick={() => setOpenUpdate(true)}>
+                  Update Profile
+                </button>
               </div>
             </div>
           </div>
@@ -121,6 +94,8 @@ const Profile = () => {
       {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   );
+
+
 };
 
 export default Profile;

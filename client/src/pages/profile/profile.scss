@@ -34,29 +34,30 @@ body {
     .profileContainer {
       padding: 20px 70px;
 
-      @include mobile{
+      @include mobile {
         padding: 10px;
       }
 
-      @include tablet{
+      @include tablet {
         padding: 20px;
       }
 
       .uInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
         height: 180px;
-        -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-        -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-        box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+        -webkit-box-shadow: 0 0 25px -10px rgba(0, 0, 0, 0.38);
+        -moz-box-shadow: 0 0 25px -10px rgba(0, 0, 0, 0.38);
+        box-shadow: 0 0 25px -10px rgba(0, 0, 0, 0.38);
         border-radius: 20px;
         background-color: themed("bg");
         color: themed("textColor");
         padding: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         margin-bottom: 20px;
 
-        @include mobile{
+        @include mobile {
           flex-direction: column;
           height: 30vh;
           padding: 20px;
@@ -66,13 +67,15 @@ body {
         .left {
           flex: 1;
           display: flex;
+          font-size: 32px;
+          width: 100%;
           gap: 10px;
 
-          @include tablet{
+          @include tablet {
             flex-wrap: wrap;
           }
 
-          a{
+          a {
             color: themed("textColorSoft");
           }
         }
@@ -81,19 +84,29 @@ body {
           flex: 1;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          justify-content: flex-start;
           gap: 10px;
+          height: 100%;
 
           span {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
             font-size: 30px;
             font-weight: 500;
           }
 
           .info {
-            width: 100%;
             display: flex;
-            align-items: center;
-            justify-content: space-around;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            height: 100%;
+
+            div {
+              padding-right: 1em;
+            }
 
             .item {
               display: flex;
@@ -106,6 +119,7 @@ body {
               }
             }
           }
+
           button {
             border: none;
             background-color: #5271ff;
@@ -126,4 +140,10 @@ body {
       }
     }
   }
+}
+
+center-items {
+  display: flex;
+  //flex-direction: column;
+  justify-content: center;
 }
