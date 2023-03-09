@@ -1,11 +1,11 @@
 import {useState , useContext} from "react";
-import icons from './icons'
 import {Link} from "react-router-dom";
 import Comments from "../comments/Comments";
 import moment from "moment";
 import {useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import {AuthContext} from "../../context/authContext";
+import icons from './icons'
 import "./post.scss";
 
 const Post = ({post}) => {

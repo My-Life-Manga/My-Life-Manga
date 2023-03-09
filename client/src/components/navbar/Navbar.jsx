@@ -31,7 +31,7 @@ const Navbar = () => {
           <span>MangaLife</span>
         </Link>
         <NavLink to="/">
-          <icons.HomeOutlinedIcon/>
+          <icons.HomeOutlinedIcon style={{color: darkMode ? "#fff" : "#000"}} />
         </NavLink>
         {darkMode ? (<icons.WbSunnyOutlinedIcon onClick={toggle}/>) : (<icons.DarkModeOutlinedIcon onClick={toggle}/>)}
       </div>
