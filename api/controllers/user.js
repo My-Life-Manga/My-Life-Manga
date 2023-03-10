@@ -1,5 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const getUser = (req, res) => {
   const userId = req.params.userId;
@@ -18,7 +20,7 @@ export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not authenticated!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
+  jwt.verify(token, process.env.USER_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =

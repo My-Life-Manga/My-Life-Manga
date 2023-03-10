@@ -1,6 +1,9 @@
 import {db} from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const register = (req, res) => {
   //CHECK USER IF EXISTS
@@ -8,7 +11,7 @@ export const register = (req, res) => {
 
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
-    if (data.length) return res.status(409).json("User already exists!");
+    if (data.length) return res.status(409).json(process.env.AUTH_USER_ExISTS);
 
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
@@ -24,7 +27,7 @@ export const register = (req, res) => {
 
     db.query(q, [values], (err) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).json("User has been created.");
+      return res.status(200).json(process.env.AUTH_USER_CREATED);
     });
   });
 };
@@ -34,7 +37,7 @@ export const login = (req, res) => {
 
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
-    if (data.length === 0) return res.status(404).json("User not found!");
+    if (data.length === 0) return res.status(404).json(process.env.AUTH_USER_NOT_FOUND);
 
     const checkPassword = bcrypt.compareSync(
       req.body.password,
@@ -42,21 +45,21 @@ export const login = (req, res) => {
     );
 
     if (!checkPassword)
-      return res.status(400).json("Wrong password or username!");
+      return res.status(400).json(process.env.AUTH_USER_WRONG);
 
-    const token = jwt.sign({id: data[0].id}, "secretkey");
+    const token = jwt.sign({id: data[0].id}, process.env.AUTH_USER_SECRET_KEY);
 
     const {password, ...others} = data[0];
 
-    res.cookie("accessToken", token, {
+    res.cookie(process.env.AUTH_USER_ACCESS_TOKEN, token, {
       httpOnly: true,
     }).status(200).json(others);
   });
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("accessToken", {
+  res.clearCookie(process.env.AUTH_USER_ACCESS_TOKEN, {
     secure: true,
     sameSite: true,
-  }).status(200).json("User has been logged out.")
+  }).status(200).json(process.env.AUTH_USER_LOGGED_OUT)
 };

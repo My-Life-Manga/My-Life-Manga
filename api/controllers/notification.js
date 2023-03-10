@@ -1,11 +1,13 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const getNotifications = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
+  jwt.verify(token, process.env.NOTIFICATION_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = "SELECT * FROM notifications WHERE recipientId = ? ORDER BY createdAt DESC";
@@ -20,7 +22,7 @@ export const markNotificationsAsRead = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
+  jwt.verify(token, process.env.NOTIFICATION_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = "UPDATE notifications SET `readAt` = true WHERE recipientId = ?";
@@ -36,7 +38,7 @@ export const deleteNotifications = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
+  jwt.verify(token, process.env.NOTIFICATION_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = "DELETE FROM notifications WHERE recipientId = ?";

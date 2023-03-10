@@ -1,6 +1,8 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const getComments = (req, res) => {
   const q = `SELECT c.*, u.id AS userId, name, profilePic FROM comments AS c JOIN users AS u ON (u.id = c.userId)
@@ -15,10 +17,10 @@ export const getComments = (req, res) => {
 
 export const addComment = (req, res) => {
   const token = req.cookies.accessToken;
-  if (!token) return res.status(401).json("Not logged in!");
+  if (!token) return res.status(401).json(process.env.COMMENT_NOT_LOGGED_IN);
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+  jwt.verify(token, process.env.COMMENT_SECRET_KEY, (err, userInfo) => {
+    if (err) return res.status(403).json(process.env.COMMENT_INVALID_TOKEN);
 
     const q = "INSERT INTO comments(`desc`, `createdAt`, `userId`, `postId`) VALUES (?)";
     const values = [
@@ -30,7 +32,7 @@ export const addComment = (req, res) => {
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).json("Comment has been created.");
+      return res.status(200).json(process.env.COMMENT_CREATED);
     });
   });
 };
@@ -40,7 +42,7 @@ export const deleteComment = (req, res) => {
   if (!token) return res.status(401).json("Not authenticated!");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+    if (err) return res.status(403).json(process.env.COMMENT_INVALID_TOKEN);
 
     const commentId = req.params.id;
     const q = "DELETE FROM comments WHERE `id` = ? AND `userId` = ?";
