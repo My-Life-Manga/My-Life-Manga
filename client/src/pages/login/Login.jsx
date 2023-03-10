@@ -32,7 +32,6 @@ const Login = () => {
       <div className="card">
         <div className="left">
           <h1>Manga Life</h1>
-          <p></p>
           <span>Don't have an account?</span>
           <Link to="/register">
             <button>Register</button>
@@ -41,18 +40,8 @@ const Login = () => {
         <div className="right">
           <h1>Login</h1>
           <form>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-            />
+            <input type="text" placeholder="Username" name="username" onChange={handleChange}/>
+            <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
             {err && err}
             <button onClick={handleLogin}>Login</button>
           </form>

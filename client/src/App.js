@@ -1,76 +1,84 @@
-import {createBrowserRouter, RouterProvider, Outlet, Navigate} from "react-router-dom";
-import {Login, Register, Home, Profile} from './pages/index'
-import {Navbar, LeftBar, RightBar } from './components/index'
-import "./style.scss";
-import {useContext} from "react";
-import {DarkModeContext} from "./context/darkModeContext";
-import {AuthContext} from "./context/authContext";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
+import { Login, Register, Home, Profile, ProfileEdit } from "./pages/index";
+import { Navbar, LeftBar, RightBar } from "./components/index";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/authContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-function App() {
-  const {currentUser} = useContext(AuthContext);
-
-  const {darkMode} = useContext(DarkModeContext);
-
+function useRoutes() {
+  const { currentUser } = useContext(AuthContext);
+  const { darkMode } = useContext(DarkModeContext);
   const queryClient = new QueryClient();
 
-  const Layout = () => {
+  const Layout = ({ children }) => {
     return (
       <QueryClientProvider client={queryClient}>
         <div className={`theme-${darkMode ? "dark" : "light"}`}>
-          <Navbar/>
-          <div style={{display: "flex"}}>
-            <LeftBar/>
-            <div style={{flex: 6}}>
-              <Outlet/>
+          <Navbar />
+          <div style={{ display: "flex" }}>
+            <LeftBar />
+            <div style={{ flex: 6 }}>
+              {children}
             </div>
-            <RightBar/>
+            <RightBar />
           </div>
         </div>
       </QueryClientProvider>
     );
   };
 
-  const ProtectedRoute = ({children}) => {
+  const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to="/login"/>;
+      return <Navigate to="/login" />;
     }
 
     return children;
   };
 
-  const router = createBrowserRouter([
+  return [
     {
       path: "/",
       element: (
         <ProtectedRoute>
-          <Layout/>
+          <Layout>
+            <Outlet />
+          </Layout>
         </ProtectedRoute>
       ),
       children: [
         {
           path: "/",
-          element: <Home/>,
+          element: <Home />,
         },
         {
           path: "/profile/:id",
-          element: <Profile/>,
+          element: <Profile />,
+        },
+        {
+          path: "/profile/edit",
+          element: <ProfileEdit />,
         },
       ],
     },
     {
       path: "/login",
-      element: <Login/>,
+      element: <Login />,
     },
     {
       path: "/register",
-      element: <Register/>,
+      element: <Register />,
     },
-  ]);
+  ];
+}
+
+function App() {
+  const routes = useRoutes();
+  const router = createBrowserRouter(routes);
 
   return (
     <RouterProvider router={router}>
-      <Outlet/>
+      <Outlet />
     </RouterProvider>
   );
 }
