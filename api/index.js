@@ -1,4 +1,7 @@
 import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 import Routes from './routes/index.js'
@@ -14,7 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
@@ -46,6 +49,6 @@ app.use("/api/relationships", Routes.relationshipRoutes);
 app.use("/api/upload", Routes.uploadRoutes);
 app.use("/api/users", Routes.userRoutes);
 
-app.listen(8800, () => {
+app.listen(process.env.SERVER_PORT, () => {
   console.log("API working!");
 });

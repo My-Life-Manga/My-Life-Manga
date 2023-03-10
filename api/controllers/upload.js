@@ -1,12 +1,13 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
-import multer from "multer";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const uploadFile = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
+  jwt.verify(token, process.env.UPLOAD_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =

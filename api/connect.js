@@ -1,8 +1,11 @@
-import mysql from "mysql"
+import mysql from "mysql";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const db = mysql.createConnection({
-  host:"127.0.0.1",
-  user:"root",
-  password:"codeup",
-  database:"manga_db"
-})
+  host: process.env.CONNECT_DB_HOST,
+  user: process.env.CONNECT_DB_USER,
+  password: process.env.CONNECT_DB_PASS,
+  database: process.env.CONNECT_DB_DATA,
+});
