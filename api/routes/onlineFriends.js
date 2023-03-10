@@ -1,10 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { getOnlineUsers } from "../controllers/onlineFriend.js";
+import express from "express";
 
-const onlineFriendController = require("../controllers/onlineFriend");
+const onlineFriendRouter = express.Router();
 
-router.get("/", onlineFriendController.getOnlineUsers);
-router.post("/", onlineFriendController.addOnlineUser);
-router.delete("/", onlineFriendController.removeOnlineUser);
+// Define the routes for the onlineFriendRouter
+onlineFriendRouter.get("/", getOnlineUsers);
 
-module.exports = router;
+export default onlineFriendRouter;

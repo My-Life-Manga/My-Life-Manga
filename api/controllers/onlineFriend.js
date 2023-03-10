@@ -1,8 +1,8 @@
-import { makeRequest } from 'axios';
+import axios from 'axios';
 
-exports.getOnlineUsers = async (req, res) => {
+export const getOnlineUsers = async (req, res) => {
   try {
-    const response = await makeRequest.get('/online-friends');
+    const response = await axios.get('/online-friends');
     const onlineUsers = response.data;
     res.status(200).json(onlineUsers);
   } catch (err) {
