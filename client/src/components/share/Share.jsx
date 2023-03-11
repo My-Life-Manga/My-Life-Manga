@@ -53,26 +53,18 @@ const Share = () => {
           <div className="left">
             <img src={"/upload/" + currentUser.profilePic} alt=""/>
             <input
-              type="text"
-              placeholder={`What's on your mind ${currentUser.name}?`}
-              onChange={(e) => setDesc(e.target.value)}
-              value={desc}
+              type="text" placeholder={`What's on your mind ${currentUser.name}?`}
+              onChange={(e) => setDesc(e.target.value)} value={desc}
             />
           </div>
           <div className="right">
-            {file && (
-              <img className="file" alt="" src={URL.createObjectURL(file)}/>
-            )}
+            {file && (<img className="file" alt="" src={URL.createObjectURL(file)}/>)}
           </div>
         </div>
         <hr/>
         <div className="bottom">
           <div className="left">
-            <input
-              type="file"
-              id="file"
-              style={{display: "none"}}
-              onChange={(e) => setFile(e.target.files[0])}
+            <input type="file" id="file" style={{display: "none"}} onChange={(e) => setFile(e.target.files[0])}
             />
             <label htmlFor="file">
               <div className="item">

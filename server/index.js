@@ -1,11 +1,10 @@
 import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const app = express();
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
-import postRoutes from "./routes/posts.js";
-import commentRoutes from "./routes/comments.js";
-import likeRoutes from "./routes/likes.js";
-import relationshipRoutes from "./routes/relationships.js";
+import Routes from './routes/index.js'
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
@@ -18,7 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   }),
 );
@@ -33,26 +32,23 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({storage: storage});
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   const file = req.file;
   res.status(200).json(file.filename);
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/likes", likeRoutes);
-app.use("/api/relationships", relationshipRoutes);
+app.use("/api/auth", Routes.authRoutes);
+app.use("/api/comments", Routes.commentRoutes);
+app.use("/api/likes", Routes.likeRoutes);
+app.use("/api/notifications", Routes.notificationRoutes);
+app.use("/api/online-friends", Routes.onlineFriendsRoutes);
+app.use("/api/posts", Routes.postRoutes);
+app.use("/api/relationships", Routes.relationshipRoutes);
+app.use("/api/upload", Routes.uploadRoutes);
+app.use("/api/users", Routes.userRoutes);
 
-// Logout route
-app.get("/api/auth/logout", (req, res) => {
-  res.clearCookie("token");
-  res.status(200).send("Logged out successfully");
-});
-
-app.listen(8800, () => {
+app.listen(process.env.SERVER_PORT, () => {
   console.log("API working!");
 });

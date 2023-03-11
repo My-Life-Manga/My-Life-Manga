@@ -1,53 +1,64 @@
+import {useState, useEffect, useContext} from "react";
 import "./navbar.scss";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { DarkModeContext } from "../../context/darkModeContext";
-import { AuthContext } from "../../context/authContext";
+import icons from "./icons";
+import {Link, NavLink, useNavigate} from "react-router-dom";
+import {DarkModeContext} from "../../context/darkModeContext";
+import {AuthContext} from "../../context/authContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { toggle, darkMode } = useContext(DarkModeContext);
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const {toggle, darkMode} = useContext(DarkModeContext);
+  const {currentUser, logout} = useContext(AuthContext);
+  const [unreadNotifications, setUnreadNotifications] = useState([]);
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("user");
-    navigate("/login");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/notifications/get");
+        const data = await res.json();
+        setUnreadNotifications(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="navbar">
       <div className="left">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{textDecoration: "none"}}>
           <span>MangaLife</span>
         </Link>
-        <HomeOutlinedIcon />
+        <NavLink to="/">
+          <icons.HomeOutlinedIcon
+            style={{color: darkMode ? "#fff" : "#000"}}
+          />
+        </NavLink>
         {darkMode ? (
-          <WbSunnyOutlinedIcon onClick={toggle} />
+          <icons.WbSunnyOutlinedIcon onClick={toggle}/>
         ) : (
-          <DarkModeOutlinedIcon onClick={toggle} />
+          <icons.DarkModeOutlinedIcon onClick={toggle}/>
         )}
-        <GridViewOutlinedIcon />
-        <div className="search">
-          <SearchOutlinedIcon />
-          <input type="text" placeholder="Search..." />
-        </div>
       </div>
       <div className="right">
-        <PersonOutlinedIcon />
-        <EmailOutlinedIcon />
-        <NotificationsOutlinedIcon />
+        {unreadNotifications.length > 0 ? (
+          <div className="notification-badge">{unreadNotifications.length}</div>
+        ) : null}
+        <icons.NotificationsOutlinedIcon/>
         <div className="user">
-          <img src={"/upload/" + currentUser.profilePic} alt="" />
-          <span>{currentUser.name}</span>
+          <NavLink to={`/profile/${currentUser.id}`}>
+            <img src={"/upload/" + currentUser.profilePic} alt=""/>
+          </NavLink>
         </div>
         <button className="logout" onClick={handleLogout}>
           Logout

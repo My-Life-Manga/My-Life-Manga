@@ -84,3 +84,67 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 1450px) {
+  .register .card {
+    height: 90vh;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .register .card {
+    height: 90vh;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .register .card {
+    height: 90vh;
+    width: 90%;
+  }
+  .register .card .left {
+    width: 20%;
+  }
+  .register {
+    .card {
+      .left {
+    display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .register .card {
+    height: 90vh;
+    width: 90%;
+  }
+  .register .card .left {
+    width: 100%;
+    order: 2;
+    padding: 30px;
+  }
+  .register .card .right {
+    width: 100%;
+    padding: 30px;
+  }
+  .register {
+    .card {
+      flex-direction: column;
+      gap: 30px;
+
+      .left {
+        h1 {
+          font-size: 2em;
+        }
+      }
+
+      form {
+        width: 100%;
+      }
+    }
+  }
+}
