@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const db = mysql.createConnection({
-  host: process.env.CONNECT_DB_HOST,
-  user: process.env.CONNECT_DB_USER,
-  password: process.env.CONNECT_DB_PASS,
-  database: process.env.CONNECT_DB_DATA,
-});
+  host:"my-manga-db.cnwidfzee54g.us-east-1.rds.amazonaws.com",
+  user:"admin",
+  password:"Germany0307",
+  database:"manga_db"
+})
