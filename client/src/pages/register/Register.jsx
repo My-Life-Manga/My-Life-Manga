@@ -26,7 +26,6 @@ const Register = () => {
       navigate("/login"); // Redirect to home page once registered
     } catch (err) {
       setErr(err.response.data);
-      console.error(err)
     }
   };
 
@@ -48,7 +47,7 @@ const Register = () => {
             <input type="email" placeholder="Email" name="email" onChange={handleChange} />
             <input type="password" placeholder="Password" name="password" onChange={handleChange} />
             <input type="text" placeholder="Name" name="name" onChange={handleChange} />
-            {err && err.response && <p>{err.response.data}</p>}
+            {err && <p>{err.sqlMessage}</p>}
             <button onClick={handleClick}>Register</button>
           </form>
         </div>
