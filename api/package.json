@@ -6,6 +6,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "framer-motion": "^10.3.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
