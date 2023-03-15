@@ -12,15 +12,17 @@ const ProfileEdit = () => {
   const [website, setWebsite] = useState("");
   const [coverPic, setCoverPic] = useState(null);
   const [profilePic, setProfilePic] = useState(null);
+  const [interests, setInterests] = useState("");
+  const [aboutMe, setAboutMe] = useState("");
 
   const { currentUser } = useContext(AuthContext);
 
   const userId = currentUser.id;
 
   const { isLoading, error, data } = useQuery(["user"], () =>
-    makeRequest.get("/users/find/" + userId).then((res) => {
-      return res.data;
-    })
+      makeRequest.get("/users/find/" + userId).then((res) => {
+        return res.data;
+      })
   );
 
   useEffect(() => {
@@ -28,18 +30,20 @@ const ProfileEdit = () => {
       setName(data.name);
       setCity(data.city);
       setWebsite(data.website);
+      setInterests(data.interests);
+      setAboutMe(data.about_me);
     }
   }, [isLoading, data]);
 
   const queryClient = useQueryClient();
 
   const updateMutation = useMutation(
-    (formData) => makeRequest.put("/users/" + userId, formData),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["user"]);
-      },
-    }
+      (formData) => makeRequest.put("/users/update", formData),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(["user"]);
+        },
+      }
   );
 
   const handleUpdate = (e) => {
@@ -49,6 +53,8 @@ const ProfileEdit = () => {
     formData.append("name", name);
     formData.append("city", city);
     formData.append("website", website);
+    formData.append("interests", interests);
+    formData.append("about_me", aboutMe);
     if (coverPic) {
       formData.append("coverPic", coverPic);
     }
@@ -60,61 +66,73 @@ const ProfileEdit = () => {
   };
 
   return (
-    <div className="profileEdit">
-      {isLoading ? (
-        "loading"
-      ) : (
-        <>
-          <div className="images">
-            <img src={"/upload/" + data.coverPic} alt="" className="cover" />
-            <img
-              src={"/upload/" + data.profilePic}
-              alt=""
-              className="profilePic"
-            />
-          </div>
-          <form onSubmit={handleUpdate}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Website"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-            <div>
-              <label htmlFor="coverPic">Cover Photo:</label>
-              <input
-                type="file"
-                id="coverPic"
-                accept="image/*"
-                onChange={(e) => setCoverPic(e.target.files[0])}
-              />
-            </div>
-            <div>
-              <label htmlFor="profilePic">Profile Photo:</label>
-              <input
-                type="file"
-                id="profilePic"
-                accept="image/*"
-                onChange={(e) => setProfilePic(e.target.files[0])}
-              />
-            </div>
-            <button type="submit">Update Profile</button>
-          </form>
-        </>
-      )}
-    </div>
+      <div className="profileEdit">
+        {isLoading ? (
+            "loading"
+        ) : (
+            <>
+              <div className="images">
+                <img src={"/upload/" + data.coverPic} alt="" className="cover" />
+                <img
+                    src={"/upload/" + data.profilePic}
+                    alt=""
+                    className="profilePic"
+                />
+              </div>
+              <form onSubmit={handleUpdate}>
+                <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                />
+                <textarea
+                    placeholder="Interests"
+                    value={interests}
+                    onChange={(e) => setInterests(e.target.value)}
+                />
+                <textarea
+                    placeholder="About Me"
+                    value={aboutMe}
+                    onChange={(e) => setAboutMe(e.target.value)}
+                />
+                <div>
+                  <label htmlFor="coverPic">Cover Photo:</label>
+                  <input
+                      type="file"
+                      id="coverPic"
+                      accept="image/*"
+                      onChange={(e) => setCoverPic(e.target.files[0])}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="profilePic">Profile Photo:</label>
+                  <input
+                      type="file"
+                      id="profilePic"
+                      accept="image/*"
+                      onChange={(e) => setProfilePic(e.target.files[0])}
+                  />
+                </div>
+                <button type="submit" onClick={handleUpdate}>
+                  Update Profile
+                </button>
+              </form>
+            </>
+        )}
+      </div>
   );
 };
 
