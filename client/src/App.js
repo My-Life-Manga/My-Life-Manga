@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
-import { Login, Register, Home, Profile, ProfileEdit, About } from "./pages/index";
+import { Login, Register, Home, Profile, ProfileEdit, About, Landing } from "./pages/index";
 import { Navbar, LeftBar, RightBar } from "./components/index";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -33,13 +33,17 @@ function useRoutes() {
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/landing" />;
     }
 
     return children;
   };
 
   return [
+    {
+      path: "/landing",
+      element: <Landing />,
+    },
     {
       path: "/",
       element: (

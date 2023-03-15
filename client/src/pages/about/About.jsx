@@ -18,7 +18,7 @@ function About() {
 
                 <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
                   <div className="effect effect-nine">
-                    <img src="https://lps.ericksonliving.com/wp-content/uploads/2019/08/Adibe-3.jpg" width="350" height="500" alt="" className="img-fluid"/>
+                    <img src="https://avatars.githubusercontent.com/u/114946953?v=4" width="350" height="500" alt="" className="img-fluid"/>
                     <div className="tab-text">
                       <p>Work with Erickson Living Managemnt's computer network, using information technology to make network systems for all employees to use. These data networks include local area networks (LANs), wide area networks (WANs), intranets and extranets.</p>
                     </div>
@@ -33,7 +33,7 @@ function About() {
 
                 <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
                   <div className="effect effect-nine">
-                    <img src="https://lps.ericksonliving.com/wp-content/uploads/2019/08/Adibe-3.jpg" width="350" height="500" alt="" className="img-fluid"/>
+                    <img src="https://s3.amazonaws.com/alumni.codeup.com/AP%20Antonio%20Ochoa.jpg" width="350" height="500" alt="" className="img-fluid"/>
                     <div className="tab-text">
                       <p>Work with Erickson Living Managemnt's computer network, using information technology to make network systems for all employees to use. These data networks include local area networks (LANs), wide area networks (WANs), intranets and extranets.</p>
                     </div>
@@ -48,7 +48,7 @@ function About() {
 
                 <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
                   <div className="effect effect-nine">
-                    <img src="https://lps.ericksonliving.com/wp-content/uploads/2019/08/Adibe-3.jpg" width="350" height="500" alt="" className="img-fluid"/>
+                    <img src="https://s3.amazonaws.com/alumni.codeup.com/AP%20Crystal%20Ochoa.jpg" width="350" height="500" alt="" className="img-fluid"/>
                     <div className="tab-text">
                       <p>Work with Erickson Living Managemnt's computer network, using information technology to make network systems for all employees to use. These data networks include local area networks (LANs), wide area networks (WANs), intranets and extranets.</p>
                     </div>

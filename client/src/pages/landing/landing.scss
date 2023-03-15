@@ -1,0 +1,58 @@
+// Import the styles for the motion component
+@import "node_modules/framer-motion/dist/framer-motion.css";
+
+// Define some variables for colors and fonts
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$font-family: 'Open Sans', sans-serif;
+
+// Define global styles for the body
+body {
+  font-family: $font-family;
+  background-color: #f8f9fa;
+}
+
+// Style the heading
+h1 {
+  color: $primary-color;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+// Style the paragraph
+p {
+  color: $secondary-color;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+// Style the button
+button {
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  display: block;
+  margin: 0 auto;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// Style the motion components
+motion.div {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+motion.button {
+  display: block;
+  margin: 2rem auto;
+}
