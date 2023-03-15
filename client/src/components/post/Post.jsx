@@ -73,6 +73,7 @@ const Post = ({post}) => {
         <div className="content">
           <p>{post.desc}</p>
           <img src={"/upload/" + post.img} alt=""/>
+          {/* IMAGE URL FROM FILESTACK HERE */}
         </div>
         <div className="info">
           <div className="item">
