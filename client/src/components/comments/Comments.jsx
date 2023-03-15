@@ -10,23 +10,23 @@ const Comments = ({postId}) => {
   const {currentUser} = useContext(AuthContext);
 
   const {isLoading, error, data} = useQuery(["comments"], () =>
-    makeRequest.get("/comments?postId=" + postId).then((res) => {
-      return res.data;
-    })
+      makeRequest.get("/comments?postId=" + postId).then((res) => {
+        return res.data;
+      })
   );
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (newComment) => {
-      return makeRequest.post("/comments", newComment);
-    },
-    {
-      onSuccess: () => {
-        // Invalidate and refetch
-        queryClient.invalidateQueries(["comments"]);
+      (newComment) => {
+        return makeRequest.post("/comments", newComment);
       },
-    });
+      {
+        onSuccess: () => {
+          // Invalidate and refetch
+          queryClient.invalidateQueries(["comments"]);
+        },
+      });
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -35,25 +35,26 @@ const Comments = ({postId}) => {
   };
 
   return (
-    <div className="comments">
-      <div className="write">
-        <img src={"/upload/" + currentUser.profilePic} alt=""/>
-        <input type="text" placeholder="write a comment" value={desc} onChange={(e) => setDesc(e.target.value)}/>
-        <button onClick={handleClick}>Send</button>
-      </div>
-      {error ? "Something went wrong" : isLoading ? "loading" : data.map((comment) => (
-        <div className="comment">
-          <img src={"/upload/" + comment.profilePic} alt=""/>
-          <div className="info">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
-          </div>
-          <span className="date">
+      <div className="comments">
+        <div className="write">
+          <img src={"/upload/" + currentUser.profilePic} alt=""/>
+          <input type="text" placeholder="write a comment" value={desc} onChange={(e) => setDesc(e.target.value)}/>
+          <button onClick={handleClick}>Send</button>
+        </div>
+        {error ? "Something went wrong" : isLoading ? "loading" : data.map((comment, index) => (
+            <div className="comment">
+              <span className="comment-number">{index + 1}</span>
+              <img src={"/upload/" + comment.profilePic} alt=""/>
+              <div className="info">
+                <span>{comment.name}</span>
+                <p>{comment.desc}</p>
+              </div>
+              <span className="date">
             {moment(comment.createdAt).fromNow()}
           </span>
-        </div>
-      ))}
-    </div>
+            </div>
+        ))}
+      </div>
   );
 };
 

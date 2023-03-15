@@ -49,12 +49,15 @@ const Navbar = () => {
         ) : (
           <icons.DarkModeOutlinedIcon onClick={toggle}/>
         )}
+        <NavLink to="/about" >
+          <icons.group />
+        </NavLink>
       </div>
       <div className="right">
         {unreadNotifications.length > 0 ? (
           <div className="notification-badge">{unreadNotifications.length}</div>
         ) : null}
-        <icons.NotificationsOutlinedIcon/>
+        {/*<icons.NotificationsOutlinedIcon/>*/}
         <div className="user">
           <NavLink to={`/profile/${currentUser.id}`}>
             <img src={"/upload/" + currentUser.profilePic} alt=""/>
