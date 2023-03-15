@@ -9,6 +9,12 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
+    // LAUNCH WEBSITE CONFIG
+    // const res = await axios.post("https://mylifemanga.com:3000/api/auth/login", inputs, {
+    //   withCredentials: true,
+    // });
+
+    // LOCAL WEBSITE CONFIG
     const res = await axios.post("http://localhost:8800/api/auth/login", inputs, {
       withCredentials: true,
     });
@@ -18,6 +24,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
+      // LAUNCH WEBSITE CONFIG
+      // await axios.post("https://mylifemanga.com:3000/api/auth/logout", {}, {
+      //   withCredentials: true,
+      // });
+
+      // LOCAL WEBSITE CONFIG 
       await axios.post("http://localhost:8800/api/auth/logout", {}, {
         withCredentials: true,
       });

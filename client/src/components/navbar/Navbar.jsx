@@ -9,20 +9,20 @@ const Navbar = () => {
   const navigate = useNavigate();
   const {toggle, darkMode} = useContext(DarkModeContext);
   const {currentUser, logout} = useContext(AuthContext);
-  const [unreadNotifications, setUnreadNotifications] = useState([]);
+  // const [unreadNotifications, setUnreadNotifications] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/notifications/get");
-        const data = await res.json();
-        setUnreadNotifications(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch("/api/notifications/get");
+  //       const data = await res.json();
+  //       setUnreadNotifications(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const handleLogout = async () => {
     try {
@@ -51,10 +51,10 @@ const Navbar = () => {
         )}
       </div>
       <div className="right">
-        {unreadNotifications.length > 0 ? (
+        {/* {unreadNotifications.length > 0 ? (
           <div className="notification-badge">{unreadNotifications.length}</div>
         ) : null}
-        <icons.NotificationsOutlinedIcon/>
+        <icons.NotificationsOutlinedIcon/> */}
         <div className="user">
           <NavLink to={`/profile/${currentUser.id}`}>
             <img src={"/upload/" + currentUser.profilePic} alt=""/>

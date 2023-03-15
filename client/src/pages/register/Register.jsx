@@ -22,6 +22,10 @@ const Register = () => {
     e.preventDefault();
 
     try {
+      // LAUNCH WEBSITE CONFIG
+      // await axios.post("https://mylifemanga.com:3000/api/auth/register", inputs);
+
+      //LOCAL WEBSITE CONFIG
       await axios.post("http://localhost:8800/api/auth/register", inputs);
       navigate("/login"); // Redirect to home page once registered
     } catch (err) {
