@@ -60,9 +60,9 @@ const Navbar = () => {
             <img src={"/upload/" + currentUser.profilePic} alt=""/>
           </NavLink>
         </div>
-        <button className="logout" onClick={handleLogout}>
-          Logout
-        </button>
+        <a className="logout" onClick={handleLogout}>
+          <icons.logout/>
+        </a>
       </div>
     </div>
   );

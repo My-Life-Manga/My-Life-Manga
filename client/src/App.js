@@ -1,10 +1,13 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
-import { Login, Register, Home, Profile, ProfileEdit } from "./pages/index";
+import { Login, Register, Home, Profile, ProfileEdit, About } from "./pages/index";
 import { Navbar, LeftBar, RightBar } from "./components/index";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 function useRoutes() {
   const { currentUser } = useContext(AuthContext);
@@ -68,6 +71,10 @@ function useRoutes() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/about",
+      element: <About />,
     },
   ];
 }

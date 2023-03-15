@@ -9,7 +9,7 @@ dotenv.config();
 export const getPosts = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
-  console.log (token);
+
   jwt.verify(token, process.env.POST_SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 

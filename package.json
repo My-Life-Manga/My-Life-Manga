@@ -2,7 +2,7 @@
   "name": "my_life_manga",
   "version": "1.0.0",
   "scripts": {
-    "install": "cd api && npm install && cd ../client && npm install"
+    "install": "cd ../../Downloads/capstone-2/api && npm install && cd ../client && npm install"
   },
   "dependencies": {
     "react": "^18.2.0",
