@@ -12,6 +12,7 @@
 
     .container {
       padding: 20px;
+
       .top {
         display: flex;
         align-items: center;
@@ -21,6 +22,7 @@
           display: flex;
           align-items: center;
           flex: 3;
+
           img {
             width: 40px;
             height: 40px;
@@ -37,10 +39,12 @@
             color: themed("textColor");
           }
         }
+
         .right {
           flex: 1;
           display: flex;
           justify-content: flex-end;
+
           .file {
             width: 100px;
             height: 100px;
@@ -61,6 +65,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .left {
           display: flex;
           align-items: center;
@@ -82,6 +87,7 @@
             }
           }
         }
+
         .right {
           button {
             border: none;
@@ -90,6 +96,24 @@
             cursor: pointer;
             background-color: #5271ff;
             border-radius: 3px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 300px) {
+  .home {
+    .share {
+      .container {
+        .top {
+          .left {
+            input {
+              font-size: 0.5em;
+              width: 20em;
+            }
           }
         }
       }

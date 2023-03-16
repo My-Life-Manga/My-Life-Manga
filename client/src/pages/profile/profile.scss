@@ -52,9 +52,7 @@
         background-color: themed("bg");
         color: themed("textColor");
         padding: 50px;
-        margin-top: 2.5em;
         margin-bottom: 20px;
-        width: 100%;
 
         @include mobile {
           flex-direction: column;
@@ -139,7 +137,6 @@ center-items {
   display: flex;
   //flex-direction: column;
   justify-content: center;
-  width: 100%;
 }
 
 .update-profile {
