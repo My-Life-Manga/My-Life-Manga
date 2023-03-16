@@ -3,14 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="Web site created using create-react-app"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <style>
       * {
         font-family: "Open Sans", sans-serif;
@@ -21,6 +15,16 @@
     <title>React App</title>
   </head>
   <body>
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+    <script src=".env"></script>
+    <script>
+      const client = filestack.init(fileStackKey);
+      document.getElementById("content").addEventListener("click", function (e){
+          // replace console.log with the correspoding id
+      client.picker({accept: ["image/*"], onFileUploadFinished: function(file){console.log(file)}}).open();
+      })
+    </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
