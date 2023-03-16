@@ -14,10 +14,10 @@ export const getPosts = (req, res) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = `
-        SELECT posts.*, users.name
-        FROM posts
-                 JOIN users ON posts.userId = users.id
-        ORDER BY createdAt DESC
+      SELECT posts.*, users.name
+      FROM posts
+             JOIN users ON posts.userId = users.id
+      ORDER BY createdAt DESC
     `;
 
     db.query(q, (err, data) => {
@@ -36,7 +36,7 @@ export const addPost = (req, res) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =
-      "INSERT INTO posts(`desc`, `img`, `createdAt`, `userId`) VALUES (?)";
+        "INSERT INTO posts(`desc`, `img`, `createdAt`, `userId`) VALUES (?)";
     const values = [
       req.body.desc,
       req.body.img,
@@ -79,7 +79,7 @@ export const deletePost = (req, res) => {
       }
       // Delete post from the database
       const q =
-        "DELETE FROM posts WHERE `id`=? AND `userId` = ?";
+          "DELETE FROM posts WHERE `id`=? AND `userId` = ?";
       db.query(q, values, (err, data) => {
         if (err) {
           console.log(err);

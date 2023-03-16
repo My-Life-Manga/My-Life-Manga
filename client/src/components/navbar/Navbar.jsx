@@ -46,7 +46,7 @@ const Navbar = () => {
           ) : (
               <icons.DarkModeOutlinedIcon onClick={toggle}/>
           )}
-          <NavLink to="/about" >
+          <NavLink to="/about">
             <icons.group style={{color: darkMode ? "#fff" : "#000"}}/>
           </NavLink>
         </div>
