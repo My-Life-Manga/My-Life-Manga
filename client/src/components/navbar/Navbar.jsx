@@ -18,7 +18,6 @@ const Navbar = () => {
         const data = await res.json();
         setUnreadNotifications(data);
       } catch (error) {
-        console.log(error);
       }
     }
     fetchData();
@@ -34,40 +33,37 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
-      <div className="left">
-        <Link to="/" style={{textDecoration: "none"}}>
-          <span>MangaLife</span>
-        </Link>
-        <NavLink to="/">
-          <icons.HomeOutlinedIcon
-            style={{color: darkMode ? "#fff" : "#000"}}
-          />
-        </NavLink>
-        {darkMode ? (
-          <icons.WbSunnyOutlinedIcon onClick={toggle}/>
-        ) : (
-          <icons.DarkModeOutlinedIcon onClick={toggle}/>
-        )}
-        <NavLink to="/about" >
-          <icons.group />
-        </NavLink>
-      </div>
-      <div className="right">
-        {unreadNotifications.length > 0 ? (
-          <div className="notification-badge">{unreadNotifications.length}</div>
-        ) : null}
-        {/*<icons.NotificationsOutlinedIcon/>*/}
-        <div className="user">
-          <NavLink to={`/profile/${currentUser.id}`}>
-            <img src={"/upload/" + currentUser.profilePic} alt=""/>
+      <div className="navbar">
+        <div className="left">
+          <Link to="/" style={{textDecoration: "none"}}>
+            <span>MangaLife</span>
+          </Link>
+          <NavLink to="/">
+            <icons.HomeOutlinedIcon className="home-svg" style={{color: darkMode ? "#fff" : "#000"}}/>
+          </NavLink>
+          {darkMode ? (
+              <icons.WbSunnyOutlinedIcon onClick={toggle}/>
+          ) : (
+              <icons.DarkModeOutlinedIcon onClick={toggle}/>
+          )}
+          <NavLink to="/about" >
+            <icons.group style={{color: darkMode ? "#fff" : "#000"}}/>
           </NavLink>
         </div>
-        <a className="logout" onClick={handleLogout}>
-          <icons.logout/>
-        </a>
+        <div className="right">
+          {unreadNotifications.length > 0 ? (
+              <div className="notification-badge">{unreadNotifications.length}</div>
+          ) : null}
+          <div className="user">
+            <NavLink to={`/profile/${currentUser.id}`}>
+              <img src={"/upload/" + currentUser.profilePic} alt=""/>
+            </NavLink>
+          </div>
+          <a className="logout" onClick={handleLogout}>
+            <icons.logout/>
+          </a>
+        </div>
       </div>
-    </div>
   );
 };
 
