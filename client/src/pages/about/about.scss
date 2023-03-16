@@ -338,13 +338,13 @@ body {
   height: 100%;
   text-align: center;
 
-  p{
+  p {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 
-    svg{
+    svg {
       fill: white;
     }
 
@@ -756,34 +756,87 @@ h2.name-tag {
   background-color: #fff;
 }
 
-@media (max-width: 575px) {
-  .effect.effect-two p.description {
-    bottom: 5.8em;
-  }
-  .effect.effect-nine p {
-    font-size: 1rem;
-  }
-  .wrapper {
-    display: table;
-    vertical-align: middle;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-  .tab .effect .tab-text h2 {
-    font-size: 1.3rem !important;
-    font-family: Oswald;
-  }
-  .effect.effect-two p.description {
-    bottom: 5.8em;
-  }
-  .effect.effect-nine p {
-    font-size: 1rem;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 991px) {
   .effect h2 {
     font-size: 1.3rem !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .column-12 {
+    .well {
+      .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .column-4 {
+          max-width: 20em;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 912px) {
+  .column-12 {
+    .well {
+      .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .column-4, .col-sm-3 {
+          max-width: 23em;
+        }
+      }
+    }
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 412px) {
+  .wrapper-full {
+    width: 100%;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    vertical-align: center;
+
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center !important;
+      width: 100%;
+    }
+
+    .well {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .column-4 {
+          max-width: 30em;
+        }
+      }
+    }
   }
 }

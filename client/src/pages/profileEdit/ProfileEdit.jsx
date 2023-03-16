@@ -65,6 +65,11 @@ const ProfileEdit = () => {
     updateMutation.mutate(formData);
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    handleUpdate(e);
+  }
+
   return (
       <div className="profileEdit">
         {isLoading ? (
@@ -73,11 +78,7 @@ const ProfileEdit = () => {
             <>
               <div className="images">
                 <img src={"/upload/" + data.coverPic} alt="" className="cover" />
-                <img
-                    src={"/upload/" + data.profilePic}
-                    alt=""
-                    className="profilePic"
-                />
+                <img src={"/upload/" + data.profilePic} alt="" className="profilePic" />
               </div>
               <form onSubmit={handleUpdate}>
                 <input
@@ -126,9 +127,7 @@ const ProfileEdit = () => {
                       onChange={(e) => setProfilePic(e.target.files[0])}
                   />
                 </div>
-                <button type="submit" onClick={handleUpdate}>
-                  Update Profile
-                </button>
+                <button onClick={handleClick}>Update Profile</button>
               </form>
             </>
         )}

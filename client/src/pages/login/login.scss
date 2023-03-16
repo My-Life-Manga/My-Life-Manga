@@ -16,27 +16,27 @@
     .left {
       flex: 1;
       background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://qph.cf2.quoracdn.net/main-qimg-004fc66cac71df5fa801b92230fd9188-lq")
-          center;
+      url("https://qph.cf2.quoracdn.net/main-qimg-004fc66cac71df5fa801b92230fd9188-lq") center;
       background-size: cover;
       padding: 50px;
       display: flex;
       flex-direction: column;
       gap: 30px;
       color: white;
+      max-width: 50%;
 
       h1 {
         font-size: 100px;
         line-height: 100px;
       }
-      
+
       p {
       }
 
       span {
         font-size: 14px;
       }
-      
+
       button {
         width: 50%;
         padding: 10px;
@@ -57,20 +57,20 @@
       justify-content: center;
 
       h1 {
-      color: #555;
+        color: #555;
       }
-      
+
       form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        
+
         input {
-        border: none;
-        border-bottom: 1px solid lightgray;
-        padding: 20px 10px;
+          border: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
         }
-        
+
         button {
           width: 50%;
           padding: 10px;
@@ -79,6 +79,37 @@
           color: white;
           font-weight: bold;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 412px) {
+
+  .login {
+    height: 100%;
+    width: 100%;
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      border-radius: 0;
+
+      .left {
+        height: 100%;
+        h1 {
+          line-height: normal;
+          font-size: 3em;
+        }
+      }
+    }
+
+    .right {
+      form {
+        button {
+          width: 100%;
         }
       }
     }
