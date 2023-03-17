@@ -84,7 +84,7 @@ const Comments = ({postId}) => {
                         <Person4Icon />
                         {/*<img src={"/upload/" + comment.profilePic} alt=""/>*/}
                         <div className="info">
-                            <span>{comment.username}</span>
+                            <span>{comment.name}</span>
                             <p>{comment.desc}</p>
                         </div>
                         <div className={"right-side"}>
