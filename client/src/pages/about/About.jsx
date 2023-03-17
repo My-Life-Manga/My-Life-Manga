@@ -130,7 +130,7 @@ function About() {
                     <div className="row">
                       <div className="col-sm-3">
                         <h2 className="name-tag">Crystal Oberg</h2>
-                        <h2 className="name-tag">Rational Database System (AWS) </h2>
+                        <h2 className="name-tag">Relational Database Service (RDS)</h2>
                       </div>
                     </div>
                   </div>
