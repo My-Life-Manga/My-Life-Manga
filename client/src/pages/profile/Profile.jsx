@@ -1,10 +1,12 @@
 import "./profile.scss";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
+import InfoIcon from '@mui/icons-material/Info';
+import InterestsIcon from '@mui/icons-material/Interests';
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import Update from "../../components/update/Update";
 
@@ -33,6 +35,7 @@ const Profile = () => {
             ) : error ? (
                 <div>Error: {error.message}</div>
             ) : (
+
                 <div className="profileContainer">
                     <div className="uInfo">
                         <div className="center-items">
@@ -48,6 +51,14 @@ const Profile = () => {
                                     <div className="item">
                                         <LanguageIcon />
                                         <span>{data.website}</span>
+                                    </div>
+                                    <div className="item">
+                                        <InfoIcon />
+                                        <span>{data.about_me}</span>
+                                    </div>
+                                    <div className="item">
+                                        <InterestsIcon />
+                                        <span>{data.interests}</span>
                                     </div>
                                 </div>
                             </div>

@@ -14,8 +14,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const API = process.env.REACT_APP_NAVBAR_API;
-        const res = await fetch(API);
+        const res = await fetch("/api/notifications/get");
         const data = await res.json();
         setUnreadNotifications(data);
       } catch (error) {
@@ -57,7 +56,8 @@ const Navbar = () => {
           ) : null}
           <div className="user">
             <NavLink to={`/profile/${currentUser.id}`}>
-              <img src={"/upload/" + currentUser.profilePic} alt=""/>
+              {/* <img src={"/upload/" + currentUser.profilePic} alt=""/> */}
+              <icons.PersonIcon style={{color: darkMode ? "#fff" : "#000"}}/>
             </NavLink>
           </div>
           <a className="logout" onClick={handleLogout}>

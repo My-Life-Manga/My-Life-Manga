@@ -11,6 +11,8 @@ const ProfileEdit = () => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [website, setWebsite] = useState('');
+  const [about_me, setAbout_Me] = useState('');
+  const [interests, setInterests] = useState('');
 
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser.id;
@@ -24,6 +26,8 @@ const ProfileEdit = () => {
       setName(data.name);
       setCity(data.city);
       setWebsite(data.website);
+      setAbout_Me(data.about_me);
+      setInterests(data.interests);
     }
   }, [isLoading, data]);
 
@@ -51,6 +55,8 @@ const ProfileEdit = () => {
       name,
       city,
       website,
+      about_me,
+      interests,
     };
 
     console.log('userData:', userData); // Log userData to verify the content
@@ -66,6 +72,7 @@ const ProfileEdit = () => {
             'loading'
         ) : (
             <>
+              <div class="avatar"></div>
               <form onSubmit={handleUpdate}>
                 <input
                     type="text"
@@ -87,6 +94,20 @@ const ProfileEdit = () => {
                     value={website}
                     className="profile-input"
                     onChange={(e) => setWebsite(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="About_Me"
+                    value={about_me}
+                    className="profile-input"
+                    onChange={(e) => setAbout_Me(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Interests"
+                    value={interests}
+                    className="profile-input"
+                    onChange={(e) => setInterests(e.target.value)}
                 />
                 <button type="submit">Save Changes</button>
               </form>
