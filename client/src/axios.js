@@ -1,11 +1,16 @@
 import axios from "axios";
 
+const DEPLOY = process.env.REACT_APP_DEPLOY;
+const LOCAL = process.env.REACT_APP_LOCAL;
+
+
 // export const makeRequest = axios.create({
-//   baseURL: "https://mylifemanga.com:3000/api/",
+//   baseURL: DEPLOY,
 //   withCredentials: true,
 // });
 
 export const makeRequest = axios.create({
-  baseURL: "http://localhost:8800/api/",
+  baseURL: LOCAL,
   withCredentials: true,
 });
+

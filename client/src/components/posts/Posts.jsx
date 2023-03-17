@@ -8,8 +8,9 @@ import { useContext } from "react";
 const Posts = ({ userId }) => {
     const { toggle, darkMode } = useContext(DarkModeContext);
 
+    const API = process.env.REACT_APP_POST_POST_API
     const { isLoading, error, data } = useQuery(["posts"], () =>
-        makeRequest.get("/posts?userId=" + userId).then((res) => {
+        makeRequest.get(API + userId).then((res) => {
             return res.data;
         })
     );
@@ -46,3 +47,4 @@ const Posts = ({ userId }) => {
 };
 
 export default Posts;
+

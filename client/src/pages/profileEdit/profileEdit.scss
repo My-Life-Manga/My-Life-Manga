@@ -1,5 +1,6 @@
 @import "../../style.scss";
 
+
 .profileEdit {
   display: flex;
   flex-direction: column;
@@ -45,10 +46,20 @@
       height: 10rem;
     }
 
-    button {
-      background-color: #007bff;
+    .profile-pic, .cover-photo {
+      background-color: purple;
       color: #fff;
-      border: none;
+      border: grove;
+      border-radius: 0.2rem;
+      padding: 0.1rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: purple;
+      color: #fff;
+      border: grove;
       border-radius: 0.5rem;
       padding: 0.5rem 1rem;
       font-size: 1rem;

@@ -7,13 +7,13 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import * as filestack from "filestack-js";
 
-
 const Share = () => {
+
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 
   const upload = async (file) => {
-    const fileStackKey = "AY6agpviiTKK3EIMMiDkHz";
+    const fileStackKey = process.env.REACT_APP_FILESTACK_API_KEY;
     const client = filestack.init(fileStackKey);
 
     try {
@@ -34,7 +34,6 @@ const Share = () => {
       },
       {
         onSuccess: () => {
-          // Invalidate and refetch
           queryClient.invalidateQueries(["posts"]);
         },
       }
@@ -84,10 +83,6 @@ const Share = () => {
                   <span>Add Image</span>
                 </div>
               </label>
-              <div className="item">
-                <img src={Friend} alt=""/>
-                <span>Tag Friends</span>
-              </div>
             </div>
             <div className="right">
               <button onClick={handleClick}>Share</button>

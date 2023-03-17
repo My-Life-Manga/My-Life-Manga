@@ -14,7 +14,8 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/notifications/get");
+        const API = process.env.REACT_APP_NAVBAR_API;
+        const res = await fetch(API);
         const data = await res.json();
         setUnreadNotifications(data);
       } catch (error) {
