@@ -136,6 +136,7 @@ const ProfileEdit = () => {
                   />
                 </div>
                 <div>
+                  <div className="profile-pic">
                   <label htmlFor="profilePic">Profile Photo:</label>
                   <input
                       type="file"
@@ -144,7 +145,8 @@ const ProfileEdit = () => {
                       onChange={(e) => setProfilePic(e.target.files[0])}
                   />
                 </div>
-                <button onClick={handleClick}>Update Profile</button>
+                </div>
+                <button onClick={handleClick}>Save Changes</button>
               </form>
             </>
         )}

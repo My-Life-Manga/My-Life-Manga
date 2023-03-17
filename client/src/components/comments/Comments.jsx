@@ -8,12 +8,13 @@ import moment from "moment";
 const Comments = ({postId}) => {
     const [desc, setDesc] = useState("");
     const {currentUser} = useContext(AuthContext);
+    const postIdAPI = process.env.REACT_APP_COMMENTS_API;
 
     const {isLoading, error, data} = useQuery(
         ["comments"],
         () =>
             makeRequest
-                .get("/comments?postId=" + postId)
+                .get(postIdAPI + postId)
                 .then((res) => {
                     return res.data;
                 })
@@ -21,9 +22,10 @@ const Comments = ({postId}) => {
 
     const queryClient = useQueryClient();
 
+    const API = process.env.REACT_APP_NAVBAR_COMMENTS
     const mutationAdd = useMutation(
         (newComment) => {
-            return makeRequest.post("/comments", newComment);
+            return makeRequest.post(API, newComment);
         },
         {
             onSuccess: () => {
@@ -34,7 +36,7 @@ const Comments = ({postId}) => {
 
     const mutationDelete = useMutation(
         (commentId) => {
-            return makeRequest.delete(`/comments/${commentId}`);
+            return makeRequest.delete(`${API}/${commentId}`);
         },
         {
             onSuccess: () => {
