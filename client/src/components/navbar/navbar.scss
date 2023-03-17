@@ -11,7 +11,7 @@
     position: sticky;
     top: 0;
     background-color: themed("bg");
-    color:themed("textColor");
+    color: themed("textColor");
     z-index: 999;
 
     .left {
@@ -39,11 +39,7 @@
           background-color: transparent;
           color: themed("textColor");
 
-          @include mobile{
-            display: none;
-          }
-
-          @include tablet{
+          @include tablet {
             width: 200px;
           }
         }
@@ -55,17 +51,13 @@
       align-items: center;
       gap: 20px;
 
-      @include mobile{
-        display: none;
-      }
-
       .user {
         display: flex;
         align-items: center;
         gap: 10px;
         font-weight: 500;
 
-        @include tablet{
+        @include tablet {
           display: none;
         }
 
@@ -78,6 +70,26 @@
 
         span {
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .theme-dark {
+    width: 100% !important;
+
+    .navbar {
+      width: 100% !important;
+
+      .left {
+        gap: 10px !important;
+      }
+
+      .home-svg {
+        display: none;
+        padding: 0;
+        margin: 0;
       }
     }
   }

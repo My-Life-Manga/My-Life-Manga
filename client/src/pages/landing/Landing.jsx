@@ -1,38 +1,22 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import ReactDOM from 'react-dom';
-import { Landing } from '..';
+import "./landing.scss"
 
-const LandingPage = () => {
+const Landing = () => {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <h1>Welcome to our landing page!</h1>
-      <motion.p 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        Here's some information about our product or service.
-      </motion.p>
-      <a href="/login">
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-      >
-        Sign up now
-      </motion.button>
-      </a>
-    </motion.div>
+    <div className="wrapper">
+      <div className="header">
+        <div className="intro">
+          <h1>MangaLife</h1>
+            <br />
+          <h2>A place for people with similar interests.</h2>
+          <p>Welcome to our social media platform where you can showcase your life and connect with others. Share your photos and let others appreciate your talent. Get likes and comments from your friends and followers to feel the love. With our user-friendly interface, it's easy to upload your photos and interact with your followers. Join our community today and become a part of something special.</p>
+          <a href="/login">
+            <button>Join Us Now</button>
+          </a>
+          </div>
+      </div>
+    </div>
   );
 }
-
-ReactDOM.render(<LandingPage />, document.getElementById('root'));
 
 export default Landing;
