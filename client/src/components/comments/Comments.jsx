@@ -81,7 +81,8 @@ const Comments = ({postId}) => {
                 data.map((comment, index) => (
                     <div className="comment" key={comment.id}>
                         <span className="comment-number">{index + 1}</span>
-                        <img src={"/upload/" + comment.profilePic} alt=""/>
+                        <Person4Icon />
+                        {/*<img src={"/upload/" + comment.profilePic} alt=""/>*/}
                         <div className="info">
                             <span>{comment.username}</span>
                             <p>{comment.desc}</p>
