@@ -127,6 +127,7 @@ const ProfileEdit = () => {
                     onChange={(e) => setAboutMe(e.target.value)}
                 />
                 <div>
+                  <div className="cover-photo">
                   <label htmlFor="coverPic">Cover Photo:</label>
                   <input
                       type="file"
@@ -134,6 +135,7 @@ const ProfileEdit = () => {
                       accept="image/*"
                       onChange={(e) => setCoverPic(e.target.files[0])}
                   />
+                  </div>
                 </div>
                 <div>
                   <div className="profile-pic">

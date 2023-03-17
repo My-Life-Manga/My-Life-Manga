@@ -46,7 +46,7 @@
       height: 10rem;
     }
 
-    .profile-pic, .cover-photo {
+    button, .profile-pic, .cover-photo {
       background-color: purple;
       color: #fff;
       border: grove;
@@ -54,21 +54,13 @@
       padding: 0.1rem 1rem;
       font-size: 1rem;
       cursor: pointer;
-    }
-
-    button {
-      background-color: purple;
-      color: #fff;
-      border: grove;
-      border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      cursor: pointer;
 
       &:hover {
         background-color: #0069d9;
+
+
+          }
+        }
       }
     }
-  }
-}
 
