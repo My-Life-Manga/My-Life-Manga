@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./stories.scss";
 import { AuthContext } from "../../context/authContext";
+import Person4Icon from '@mui/icons-material/Person4';
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 
@@ -18,7 +19,8 @@ const Stories = () => {
   return (
     <div className="stories">
       <div className="story">
-        <img src={"/upload/" + currentUser.profilePic} alt="" />
+          <Person4Icon />
+          {/*<img src={"/upload/" + currentUser.profilePic} alt="" />*/}
         <span>{currentUser.name}</span>
         <button>+</button>
       </div>

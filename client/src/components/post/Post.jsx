@@ -7,6 +7,7 @@ import {makeRequest} from "../../axios";
 import {AuthContext} from "../../context/authContext";
 import icons from "./icons";
 import "./post.scss";
+import Person4Icon from "@mui/icons-material/Person4";
 
 const Post = ({post}) => {
     const [commentOpen, setCommentOpen] = useState(false);
@@ -72,7 +73,8 @@ const Post = ({post}) => {
             <div className="container">
                 <div className="user">
                     <div className="userInfo">
-                        <img src={"/upload/" + post.profilePic} alt=""/>
+                        <Person4Icon />
+                        {/*<img src={"/upload/" + post.profilePic} alt=""/>*/}
                         <div className="details">
                             <Link
                                 to={`/profile/${post.userId}`}

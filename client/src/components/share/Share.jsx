@@ -6,6 +6,7 @@ import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import * as filestack from "filestack-js";
+import Person4Icon from "@mui/icons-material/Person4";
 
 const Share = () => {
 
@@ -63,7 +64,8 @@ const Share = () => {
         <div className="container">
           <div className="top">
             <div className="left">
-              <img src={"/upload/" + currentUser.profilePic} alt=""/>
+              <Person4Icon />
+              {/*<img src={"/upload/" + currentUser.profilePic} alt=""/>*/}
               <input
                   type="text" placeholder={`What's on your mind ${currentUser.name}?`}
                   onChange={(e) => setDesc(e.target.value)} value={desc}

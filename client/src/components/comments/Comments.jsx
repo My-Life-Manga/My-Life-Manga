@@ -1,5 +1,6 @@
 import {useContext, useState} from "react";
 import "./comments.scss";
+import Person4Icon from '@mui/icons-material/Person4';
 import {AuthContext} from "../../context/authContext";
 import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
@@ -63,10 +64,7 @@ const Comments = ({postId}) => {
     return (
         <div className="comments">
             <div className="write">
-                <img
-                    src={"/upload/" + currentUser.profilePic}
-                    alt=""
-                />
+                <Person4Icon />
                 <input
                     type="text"
                     placeholder="write a comment"

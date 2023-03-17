@@ -16,7 +16,7 @@ function About() {
                   <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
 
                     <div className="effect effect-nine">
-                      <img src="https://avatars.githubusercontent.com/u/114946953?v=4" width="350" height="500" alt=""
+                      <img src="https://avatars.githubusercontent.com/u/114946953?v=4" width="350" height="380" alt=""
                            className="img-fluid"/>
                       <div className="tab-text">
                         <p>
@@ -54,7 +54,7 @@ function About() {
                   <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
                     <div className="effect effect-nine">
                       <img src="https://s3.amazonaws.com/alumni.codeup.com/AP%20Antonio%20Ochoa.jpg" width="350"
-                           height="500" alt="" className="img-fluid"/>
+                           height="380" alt="" className="img-fluid"/>
                       <div className="tab-text">
 
                         <p>
@@ -88,7 +88,7 @@ function About() {
                     </div>
                     <div className="row">
                       <div className="col-sm-3">
-                        <h2 className="name-tag">Antonio Ochoa-Perez</h2>
+                        <h2 className="name-tag">Antonio Perez Ochoa</h2>
                         <h2 className="name-tag">Deployment</h2>
                       </div>
                     </div>
@@ -97,7 +97,7 @@ function About() {
                   <div className="column-4 column-sm-6 column-md-6 column-xs-12 box-tab">
                     <div className="effect effect-nine">
                       <img src="https://s3.amazonaws.com/alumni.codeup.com/AP%20Crystal%20Ochoa.jpg" width="350"
-                           height="500" alt="" className="img-fluid"/>
+                           height="380" alt="" className="img-fluid"/>
                       <div className="tab-text">
                         <p>
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ function About() {
                     <div className="row">
                       <div className="col-sm-3">
                         <h2 className="name-tag">Crystal Oberg</h2>
-                        <h2 className="name-tag">RDS and Styling </h2>
+                        <h2 className="name-tag">Rational Database System (AWS) </h2>
                       </div>
                     </div>
                   </div>
